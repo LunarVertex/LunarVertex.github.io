@@ -21,7 +21,7 @@ social:
   github:
 
 user:
-  name: LunarVertex
+  name: Jerod
   avatar: images/avatar.jpg
   location:
   description:
@@ -71,7 +71,7 @@ ga_domain:
 ba_track_id:
 
 # picture of about page
-about_pic: about.png
+about_pic: images/avatar.jpg
 
 image_zoom:
   enable: true
