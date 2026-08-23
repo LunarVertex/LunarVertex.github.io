@@ -10,3 +10,11 @@
 .about-page .about-title {
   font-weight: normal;
 }
+.about-page .content blockquote {
+  background: #f0f6fb;
+  border-left: 4px solid #5b9bd5;
+  color: #2e6da4;
+  border-radius: 6px;
+  padding: 0.6em 1em;
+  margin: 1em 0;
+}
