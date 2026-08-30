@@ -43,7 +43,10 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
-syntax_highlighter: highlight.js
+# 置空以关闭服务端高亮：claudia 主题通过自带 highlight.pack.js 在浏览器端高亮，
+# 其 CSS（a11y-light）只识别 .hljs-* 类名。注意 Hexo 7 默认值为 highlight.js，
+# 注释掉无效，必须显式置空
+syntax_highlighter: ''
 highlight:
   enable: false
   line_number: true

@@ -1,10 +1,7 @@
 ---
 title: "一次诡异的 invalid query value：我最终追到了 Python 的 Class Identity"
 date: 2026-08-30 12:00:00
-tags:
-  - Python
-  - 调试
-  - MongoEngine
+tags: [Python, 调试, MongoEngine]
 ---
 
 > 从 MongoEngine，到 `isinstance`，再到 `sys.modules` 与 `load_module()`
