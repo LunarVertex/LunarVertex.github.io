@@ -5,13 +5,14 @@
 
 最近遇到一个生产问题，现象特别反直觉。
 一个更新接口偶发失败，日志最终指向 MongoEngine：
-1invalid query value
+invalid query value
 
 但奇怪的是，传入数据库字段的对象，明明就是目标 EmbeddedDocument 类型。
 更诡异的是：同一个请求，重试几次，有时候又成功了。
 一开始我以为是数据问题：某个字段是 None？历史版本里有脏数据？但查了一圈，这些方向都对不上。
 真正让我改变判断的，是一个很不起眼的事实：
-123type(value).__name__      == TargetClass.__name__      # Truetype(value).__modu..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2026/08/30/invalid-query-value-python-class-identity/">更多</a></section></article><article class="post-item-card"><section class="content post-card-content p-4 pb-5"><h2 class="mt-4 mb-0 is-family-serif"><a href="/2026/08/17/welcome/">你好,Jerod</a></h2><time class="has-text-grey" datetime="2026-08-17T10:00:00.000Z">2026-08-17</time><p class="is-flex-grow-2 mt-2">欢迎来到 Jerod 的博客。
+type(value).__name__      == TargetClass.__name__      # True
+type(value).__module_..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2026/08/30/invalid-query-value-python-class-identity/">更多</a></section></article><article class="post-item-card"><section class="content post-card-content p-4 pb-5"><h2 class="mt-4 mb-0 is-family-serif"><a href="/2026/08/17/welcome/">你好,Jerod</a></h2><time class="has-text-grey" datetime="2026-08-17T10:00:00.000Z">2026-08-17</time><p class="is-flex-grow-2 mt-2">欢迎来到 Jerod 的博客。
 博客基于 Hexo 搭建,使用 Claudia 主题,通过 GitHub Actions 自动构建部署。
 </p><a class="button is-default mt-2 has-text-weight-semibold" href="/2026/08/17/welcome/">更多</a></section></article></section><aside class="column is-hidden-mobile is-4-tablet is-3-widescreen"><style>.search-widget .search-input {
     border: none;
