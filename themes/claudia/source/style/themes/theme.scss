@@ -1,25 +1,85 @@
 @import "./default-dark";
 @import "./default-light";
 
+@mixin dark-hljs {
+  .hljs {
+    background: transparent !important;
+    color: #e6edf3 !important;
+  }
+  .hljs-comment,
+  .hljs-quote {
+    color: #8b949e !important;
+    font-style: italic;
+  }
+  .hljs-keyword,
+  .hljs-selector-tag {
+    color: #ff7b72 !important;
+  }
+  .hljs-string,
+  .hljs-addition {
+    color: #7ee787 !important;
+  }
+  .hljs-title,
+  .hljs-section,
+  .hljs-function {
+    color: #d2a8ff !important;
+  }
+  .hljs-number,
+  .hljs-literal,
+  .hljs-built_in,
+  .hljs-builtin-name {
+    color: #79c0ff !important;
+  }
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-params {
+    color: #ffa657 !important;
+  }
+  .hljs-attr,
+  .hljs-attribute,
+  .hljs-meta {
+    color: #79c0ff !important;
+  }
+  .hljs-symbol,
+  .hljs-bullet {
+    color: #a5d6ff !important;
+  }
+  .hljs-deletion {
+    color: #ffdcd7 !important;
+    background-color: rgba(248, 81, 73, 0.15);
+  }
+}
+
+@mixin light-hljs {
+  .hljs {
+    background: transparent !important;
+    color: #24292f !important;
+  }
+}
+
 :root.appearance-light {
   @include light;
+  @include light-hljs;
 }
 
 :root.appearance-dark {
   @include dark;
+  @include dark-hljs;
 }
 
 :root.appearance-auto {
   @include light;
+  @include light-hljs;
 
   @media (prefers-color-scheme: dark) {
     @include dark;
+    @include dark-hljs;
   }
 }
 
 :root {
   --backdropFilter: 20px;
-  --borderRadius: 6px;
+  --borderRadius: 8px;
   --activeColor: #3273dc;
   --boxShadow: 0 6px 30px -10px rgba(0, 0, 0, .1);
 
@@ -49,8 +109,10 @@
 
     .content {
       blockquote {
-        background: var(--third-bg-color);
-        border-color: var(--blockquote-border-color);
+        background: var(--blockquote-bg);
+        border-left: 4px solid var(--blockquote-border-color);
+        border-radius: 0 var(--borderRadius) var(--borderRadius) 0;
+        padding: 0.8rem 1.25rem;
       }
 
       table {
@@ -62,3 +124,4 @@
     }
   }
 }
+

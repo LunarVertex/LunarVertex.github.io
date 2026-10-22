@@ -1,20 +1,31 @@
 @mixin dark{
-  --primary-bg-color: #181818;
-  --second-bg-color: #212121;
-  --third-bg-color: #ffffff14;
+  --primary-bg-color: #0f1218;
+  --second-bg-color: #161b22;
+  --third-bg-color: rgba(255, 255, 255, 0.06);
 
-  --primary-text-color: #fff;
-  --second-text-color: #aaa;
+  --primary-text-color: #f0f6fc;
+  --second-text-color: #9aa4b2;
 
-  --border-line-color: rgba(255, 255, 255, 0.05);
-  --border-line-color-2: rgba(255, 255, 255, 0.02);
-  --top-bar-bg-color: rgba(24, 24, 24, 0.8);
-  --blockquote-border-color: #aaa;
-  --table-border-color: #aaa;
-  --pre-code-bg-color: #ffffff03;
+  --border-line-color: rgba(255, 255, 255, 0.08);
+  --border-line-color-2: rgba(255, 255, 255, 0.04);
+  --top-bar-bg-color: rgba(15, 18, 24, 0.85);
+  --blockquote-border-color: #388bfd;
+  --blockquote-bg: rgba(56, 139, 253, 0.08);
+  --table-border-color: rgba(255, 255, 255, 0.1);
 
-  --skeleton-bg-color: #2b2b2b;
-  --skeleton-flash-color: 0.05;
+  --code-inline-bg: rgba(110, 118, 129, 0.22);
+  --code-inline-color: #e6edf3;
+  --code-inline-border: rgba(240, 246, 252, 0.12);
 
-  --avatar-border-color: rgba(255, 255, 255, 0.05);
+  --pre-code-bg-color: #131722;
+  --pre-code-color: #e6edf3;
+  --pre-code-border: rgba(255, 255, 255, 0.1);
+  --code-scrollbar-thumb: rgba(255, 255, 255, 0.18);
+  --code-scrollbar-track: transparent;
+
+  --skeleton-bg-color: #1f242d;
+  --skeleton-flash-color: 0.08;
+
+  --avatar-border-color: rgba(255, 255, 255, 0.08);
 }
+

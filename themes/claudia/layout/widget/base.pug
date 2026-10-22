@@ -39,6 +39,8 @@ html(lang=config.language class= `appearance-${ appearance }`)
         })();
     <!-- End Baidu Analytics -->
 
+    link(rel="preconnect" href="https://fonts.googleapis.com")
+    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
     link(rel="icon" href= url_for(theme.favicon))
     link(rel="stylesheet" href= url_for('/style/common/bulma.css'))
     link(rel="stylesheet" href= url_for('/style/base.css'))

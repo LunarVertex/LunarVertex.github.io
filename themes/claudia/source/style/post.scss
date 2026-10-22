@@ -49,41 +49,122 @@ $lineColor: var(--border-line-color);
 
 .post-page {
   .post-content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    letter-spacing: -0.003em;
+    word-break: break-word;
 
-    code {
-      border-radius: 4px;
-      background: var(--third-bg-color);
+    p {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
     }
 
-    pre {
-      padding: 0;
-      background: transparent;
+    h1, h2, h3, h4, h5, h6 {
+      font-family: $fontSans;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin-top: 2.2rem;
+      margin-bottom: 1rem;
+      line-height: 1.35;
+    }
 
-      code {
-        padding: 15px;
-        border: 1px solid $lineColor;
-        background: var(--pre-code-bg-color);
+    h2 {
+      font-size: 1.55rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border-line-color);
+    }
+
+    h3 {
+      font-size: 1.25rem;
+    }
+
+    ul, ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+
+      li {
+        margin-bottom: 0.45rem;
+        line-height: 1.75;
       }
     }
 
-    .hljs {
-      color: var(--second-text-color);
+    blockquote {
+      margin: 1.6rem 0;
+      padding: 0.9rem 1.4rem;
+      border-left: 4px solid var(--blockquote-border-color);
+      background: var(--blockquote-bg);
+      border-radius: 0 var(--borderRadius) var(--borderRadius) 0;
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    code:not(pre code) {
+      font-family: $fontMono;
+      font-size: 0.875em;
+      padding: 0.2em 0.45em;
+      border-radius: 5px;
+      background: var(--code-inline-bg);
+      color: var(--code-inline-color);
+      border: 1px solid var(--code-inline-border);
+      word-break: break-word;
+    }
+
+    pre {
+      margin: 1.8rem 0;
+      padding: 0;
+      border-radius: var(--borderRadius);
+      background: var(--pre-code-bg-color);
+      border: 1px solid var(--pre-code-border);
+      box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.12);
+      position: relative;
+      overflow-x: auto;
+
+      &::-webkit-scrollbar {
+        height: 6px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: var(--code-scrollbar-thumb);
+        border-radius: 3px;
+      }
+      &::-webkit-scrollbar-track {
+        background: var(--code-scrollbar-track);
+      }
+
+      code {
+        display: block;
+        padding: 18px 22px;
+        font-family: $fontMono;
+        font-size: 0.875rem;
+        line-height: 1.65;
+        border: none;
+        background: transparent !important;
+        color: var(--pre-code-color);
+        overflow-x: auto;
+      }
     }
 
     img {
       display: block;
-      margin: 0 auto;
+      margin: 1.5rem auto;
       max-height: 500px;
-
-      border-radius: $borderRadius;
-      box-shadow: 0 0 15px rgba(0, 0, 0, .05);
-
+      border-radius: var(--borderRadius);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .08);
       opacity: 0;
       will-change: opacity;
     }
 
     a {
       color: $activeColor;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 
