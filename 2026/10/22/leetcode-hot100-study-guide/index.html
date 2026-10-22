@@ -1,0 +1,779 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>LeetCode Hot 100 核心母题模式与 C++ STL 秒杀手册</title><meta name="description"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+📋 配套任务打卡表：👉 LeetCode Hot 100 两日极速通关清单与打卡表定位：面向具备算法基础、有一年左右空档期（原周赛 1700+）的开发者。目标：不讲冗余概念，直击 条件反射信号（题眼）、高频解题套路模版、现代 C++ 高效写法 与 常见翻车天坑，助你在两日内光速唤醒题感与肌肉记忆。
+
+
+目录
+解题模式识别矩阵（条件反射速查）
+现代 C++ STL 刷题核心肌肉记忆
+17 大专题母题套路与核心代码骨架
+1. 哈希
+2. 双指针
+3. 滑动窗口
+4. 子串与前缀和
+5. 普通数组操作
+6. 矩阵操作
+7. 链表核心模版
+8. 二叉树与递归
+9. 图论（网格与拓扑）
+10. 回溯算法模版
+11. 二分查找全场景
+12. 栈与单调栈
+13. 堆与优先队列
+14. 贪心策略
+15. 线性 &amp;#x.."><meta name="generator" content="Hexo 7.3.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jerod's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">LeetCode Hot 100 核心母题模式与 C++ STL 秒杀手册</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%A7%A3%E9%A2%98%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E7%9F%A9%E9%98%B5%EF%BC%88%E6%9D%A1%E4%BB%B6%E5%8F%8D%E5%B0%84%E9%80%9F%E6%9F%A5%EF%BC%89"><span class="toc-text">一、解题模式识别矩阵（条件反射速查）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%8E%B0%E4%BB%A3-C-STL-%E5%88%B7%E9%A2%98%E6%A0%B8%E5%BF%83%E8%82%8C%E8%82%89%E8%AE%B0%E5%BF%86"><span class="toc-text">二、现代 C++ STL 刷题核心肌肉记忆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%B3%9B%E5%9E%8B%E9%80%92%E5%BD%92-Lambda%EF%BC%88C-14-%E8%B5%B7%E6%94%AF%E6%8C%81%EF%BC%8C%E5%91%8A%E5%88%AB%E7%B1%BB%E6%88%90%E5%91%98%E6%88%96%E5%85%A8%E5%B1%80%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-text">1. 泛型递归 Lambda（C++14 起支持，告别类成员或全局函数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%88%E5%A0%86%EF%BC%89%E7%9A%84%E4%B8%89%E7%A7%8D%E9%AB%98%E6%95%88%E5%A7%BF%E5%8A%BF"><span class="toc-text">2. 优先队列（堆）的三种高效姿势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BA%8C%E5%88%86%E5%88%A9%E5%99%A8%EF%BC%9Astd-lower-bound-%E4%B8%8E-std-upper-bound"><span class="toc-text">3. 二分利器：std::lower_bound 与 std::upper_bound</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%AD%97%E7%AC%A6%E9%A2%91%E6%95%B0%E6%95%B0%E7%BB%84%EF%BC%88%E6%9E%81%E8%87%B4%E5%B8%B8%E6%95%B0%E4%BC%98%E5%8C%96%EF%BC%89"><span class="toc-text">4. 字符串与字符频数数组（极致常数优化）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0%E4%B8%8B%E6%BA%A2%E5%A4%A9%E5%9D%91%EF%BC%88Unsigned-Underflow%EF%BC%89"><span class="toc-text">5. 无符号数下溢天坑（Unsigned Underflow）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%8117-%E5%A4%A7%E4%B8%93%E9%A2%98%E6%AF%8D%E9%A2%98%E5%A5%97%E8%B7%AF%E4%B8%8E%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E9%AA%A8%E6%9E%B6"><span class="toc-text">三、17 大专题母题套路与核心代码骨架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%93%88%E5%B8%8C"><span class="toc-text">1. 哈希</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-128-%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97"><span class="toc-text">母题 128. 最长连续序列</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%8C%E6%8C%87%E9%92%88"><span class="toc-text">2. 双指针</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-015-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="toc-text">母题 015. 三数之和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-042-%E6%8E%A5%E9%9B%A8%E6%B0%B4-%E5%8F%8C%E6%8C%87%E9%92%88%E6%B3%95"><span class="toc-text">母题 042. 接雨水 (双指针法)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="toc-text">3. 滑动窗口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E4%B8%87%E8%83%BD%E6%A8%A1%E7%89%88%EF%BC%88%E4%B8%8D%E5%AE%9A%E9%95%BF%E6%9C%80%E9%95%BF-%E6%9C%80%E7%9F%AD%E5%AD%90%E4%B8%B2%EF%BC%89"><span class="toc-text">滑动窗口万能模版（不定长最长&#x2F;最短子串）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-003-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2"><span class="toc-text">母题 003. 无重复字符的最长子串</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%AD%90%E4%B8%B2%E4%B8%8E%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-text">4. 子串与前缀和</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-560-%E5%92%8C%E4%B8%BA-K-%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84"><span class="toc-text">母题 560. 和为 K 的子数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-239-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC%EF%BC%88%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%EF%BC%89"><span class="toc-text">母题 239. 滑动窗口最大值（单调队列）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%99%AE%E9%80%9A%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C"><span class="toc-text">5. 普通数组操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-041-%E7%BC%BA%E5%A4%B1%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%95%B0%EF%BC%88%E5%8E%9F%E5%9C%B0%E5%93%88%E5%B8%8C%EF%BC%89"><span class="toc-text">母题 041. 缺失的第一个正数（原地哈希）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-189-%E8%BD%AE%E8%BD%AC%E6%95%B0%E7%BB%84"><span class="toc-text">母题 189. 轮转数组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%9F%A9%E9%98%B5%E6%93%8D%E4%BD%9C"><span class="toc-text">6. 矩阵操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-054-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5%EF%BC%88%E5%9B%9B%E7%95%8C%E6%94%B6%E7%BC%A9%EF%BC%89"><span class="toc-text">母题 054. 螺旋矩阵（四界收缩）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E9%93%BE%E8%A1%A8%E6%A0%B8%E5%BF%83%E6%A8%A1%E7%89%88"><span class="toc-text">7. 链表核心模版</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%88%A9%E5%99%A8%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%A4%B4%E8%8A%82%E7%82%B9%EF%BC%88Dummy-Head%EF%BC%89"><span class="toc-text">核心利器：虚拟头节点（Dummy Head）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-206-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8"><span class="toc-text">母题 206. 反转链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-025-K-%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8"><span class="toc-text">母题 025. K 个一组翻转链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8-II%EF%BC%88%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88%E6%8E%A8%E5%AF%BC%EF%BC%89"><span class="toc-text">母题 142. 环形链表 II（快慢指针推导）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E9%80%92%E5%BD%92"><span class="toc-text">8. 二叉树与递归</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-236-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88-LCA"><span class="toc-text">母题 236. 二叉树的最近公共祖先 (LCA)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-124-%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C%EF%BC%88%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E8%B4%A1%E7%8C%AE%E6%A8%A1%E5%9E%8B%EF%BC%89"><span class="toc-text">母题 124. 二叉树中的最大路径和（自底向上贡献模型）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E5%9B%BE%E8%AE%BA%EF%BC%88%E7%BD%91%E6%A0%BC%E4%B8%8E%E6%8B%93%E6%89%91%EF%BC%89"><span class="toc-text">9. 图论（网格与拓扑）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-200-%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F%EF%BC%88%E6%B2%89%E5%B2%9B-DFS%EF%BC%89"><span class="toc-text">母题 200. 岛屿数量（沉岛 DFS）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-207-%E8%AF%BE%E7%A8%8B%E8%A1%A8%EF%BC%88Kahn-%E7%AE%97%E6%B3%95%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%EF%BC%89"><span class="toc-text">母题 207. 课程表（Kahn 算法拓扑排序）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%A8%A1%E7%89%88"><span class="toc-text">10. 回溯算法模版</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E9%9B%86%E4%B8%8E%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%E5%8E%BB%E9%87%8D%E6%A8%A1%E7%89%88%EF%BC%88%E4%BB%A5-039-040-%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="toc-text">子集与组合总和去重模版（以 039&#x2F;040 为例）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E5%85%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">11. 二分查找全场景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BB%84%E9%87%91%E6%B3%95%E5%88%99%EF%BC%9A%E9%97%AD%E5%8C%BA%E9%97%B4-left-right-%E6%A8%A1%E7%89%88%EF%BC%88%E7%BB%9D%E4%B8%8D%E6%AD%BB%E5%BE%AA%E7%8E%AF%EF%BC%89"><span class="toc-text">黄金法则：闭区间 [left, right] 模版（绝不死循环）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-033-%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84"><span class="toc-text">母题 033. 搜索旋转排序数组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E6%A0%88%E4%B8%8E%E5%8D%95%E8%B0%83%E6%A0%88"><span class="toc-text">12. 栈与单调栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E8%B0%83%E6%A0%88%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A%E5%AF%BB%E6%89%BE%E6%95%B0%E7%BB%84%E4%B8%AD%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0%E2%80%9C%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E2%80%9D%E6%88%96%E2%80%9C%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%B0%8F%E2%80%9D%E7%9A%84%E5%85%83%E7%B4%A0%E3%80%82"><span class="toc-text">单调栈适用场景：寻找数组中每个元素“下一个更大”或“下一个更小”的元素。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-084-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2%EF%BC%88%E9%A6%96%E5%B0%BE%E5%8A%A0%E5%93%A8%E5%85%B5%EF%BC%89"><span class="toc-text">母题 084. 柱状图中最大的矩形（首尾加哨兵）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E5%A0%86%E4%B8%8E%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97"><span class="toc-text">13. 堆与优先队列</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-215-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AC%AC-K-%E4%B8%AA%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0"><span class="toc-text">母题 215. 数组中的第 K 个最大元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-295-%E6%95%B0%E6%8D%AE%E6%B5%81%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0%EF%BC%88%E5%AF%B9%E9%A1%B6%E5%A0%86%EF%BC%89"><span class="toc-text">母题 295. 数据流的中位数（对顶堆）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E8%B4%AA%E5%BF%83%E7%AD%96%E7%95%A5"><span class="toc-text">14. 贪心策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-055-045-%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F"><span class="toc-text">母题 055 &#x2F; 045. 跳跃游戏</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E7%BA%BF%E6%80%A7-%E8%83%8C%E5%8C%85%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-text">15. 线性 &#x2F; 背包动态规划</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-300-%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97-LIS"><span class="toc-text">母题 300. 最长递增子序列 (LIS)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-322-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2%EF%BC%88%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E6%B1%82%E6%9C%80%E5%B0%8F%E7%A1%AC%E5%B8%81%E6%95%B0%EF%BC%89"><span class="toc-text">母题 322. 零钱兑换（完全背包求最小硬币数）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E5%A4%9A%E7%BB%B4%E4%B8%8E%E5%8C%BA%E9%97%B4%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-text">16. 多维与区间动态规划</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-1143-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97-LCS"><span class="toc-text">母题 1143. 最长公共子序列 (LCS)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-072-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB"><span class="toc-text">母题 072. 编辑距离</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-%E4%BD%8D%E8%BF%90%E7%AE%97%E4%B8%8E%E7%BB%8F%E5%85%B8%E6%8A%80%E5%B7%A7"><span class="toc-text">17. 位运算与经典技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7%E9%80%9F%E6%9F%A5"><span class="toc-text">经典位运算技巧速查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-169-%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0%EF%BC%88Boyer-Moore-%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E6%B3%95%EF%BC%89"><span class="toc-text">母题 169. 多数元素（Boyer-Moore 摩尔投票法）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%8D%E9%A2%98-075-%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB%EF%BC%88%E8%8D%B7%E5%85%B0%E5%9B%BD%E6%97%97%E4%B8%89%E8%B7%AF%E5%BF%AB%E6%8E%92%EF%BC%89"><span class="toc-text">母题 075. 颜色分类（荷兰国旗三路快排）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%8D%81%E5%A4%A7%E9%81%BF%E5%9D%91%E9%98%B2%E6%9A%B4%E9%9B%B7%E6%B8%85%E5%8D%95%EF%BC%88CheckList%EF%BC%89"><span class="toc-text">四、十大避坑防暴雷清单（CheckList）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%B8%A4%E6%97%A5%E6%9E%81%E9%80%9F%E9%80%9A%E5%85%B3%E6%89%A7%E8%A1%8C%E5%BF%83%E6%B3%95"><span class="toc-text">五、两日极速通关执行心法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B7%E9%A2%98%E5%BF%83%E6%B3%95%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">刷题心法总结：</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/LeetCode"><i class="tag post-item-tag">LeetCode</i></a><a href="/tags/C++"><i class="tag post-item-tag">C++</i></a><a href="/tags/%E7%AE%97%E6%B3%95"><i class="tag post-item-tag">算法</i></a><a href="/tags/%E5%88%B7%E9%A2%98%E6%8C%87%E5%8D%97"><i class="tag post-item-tag">刷题指南</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">LeetCode Hot 100 核心母题模式与 C++ STL 秒杀手册</h1><time class="has-text-grey" datetime="2026-10-22T23:15:00.000Z">2026-10-22</time><article class="mt-2 post-content"><blockquote>
+<p>📋 <strong>配套任务打卡表</strong>：👉 <a href="/2026/10/22/leetcode-hot100-roadmap/">LeetCode Hot 100 两日极速通关清单与打卡表</a><br><strong>定位</strong>：面向具备算法基础、有一年左右空档期（原周赛 1700+）的开发者。<br><strong>目标</strong>：不讲冗余概念，直击 <strong>条件反射信号（题眼）</strong>、<strong>高频解题套路模版</strong>、<strong>现代 C++ 高效写法</strong> 与 <strong>常见翻车天坑</strong>，助你在两日内光速唤醒题感与肌肉记忆。</p>
+</blockquote>
+<hr>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li><a href="#%E4%B8%80%E8%A7%A3%E9%A2%98%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E7%9F%A9%E9%98%B5%E6%9D%A1%E4%BB%B6%E5%8F%8D%E5%B0%84%E9%80%9F%E6%9F%A5">解题模式识别矩阵（条件反射速查）</a></li>
+<li><a href="#%E4%BA%8C%E7%8E%B0%E4%BB%A3-c-stl-%E5%88%B7%E9%A2%98%E6%A0%B8%E5%BF%83%E8%82%8C%E8%82%89%E8%AE%B0%E5%BF%86">现代 C++ STL 刷题核心肌肉记忆</a></li>
+<li><a href="#%E4%B8%8917-%E5%A4%A7%E4%B8%93%E9%A2%98%E6%AF%8D%E9%A2%98%E5%A5%97%E8%B7%AF%E4%B8%8E%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E9%AA%A8%E6%9E%B6">17 大专题母题套路与核心代码骨架</a><ul>
+<li><a href="#1-%E5%93%88%E5%B8%8C">1. 哈希</a></li>
+<li><a href="#2-%E5%8F%8C%E6%8C%87%E9%92%88">2. 双指针</a></li>
+<li><a href="#3-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3">3. 滑动窗口</a></li>
+<li><a href="#4-%E5%AD%90%E4%B8%B2%E4%B8%8E%E5%89%8D%E7%BC%80%E5%92%8C">4. 子串与前缀和</a></li>
+<li><a href="#5-%E6%99%AE%E9%80%9A%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C">5. 普通数组操作</a></li>
+<li><a href="#6-%E7%9F%A9%E9%98%B5%E6%93%8D%E4%BD%9C">6. 矩阵操作</a></li>
+<li><a href="#7-%E9%93%BE%E8%A1%A8%E6%A0%B8%E5%BF%83%E6%A8%A1%E7%89%88">7. 链表核心模版</a></li>
+<li><a href="#8-%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E9%80%92%E5%BD%92">8. 二叉树与递归</a></li>
+<li><a href="#9-%E5%9B%BE%E8%AE%BA%E7%BD%91%E6%A0%BC%E4%B8%8E%E6%8B%93%E6%89%91">9. 图论（网格与拓扑）</a></li>
+<li><a href="#10-%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%A8%A1%E7%89%88">10. 回溯算法模版</a></li>
+<li><a href="#11-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E5%85%A8%E5%9C%BA%E6%99%AF">11. 二分查找全场景</a></li>
+<li><a href="#12-%E6%A0%88%E4%B8%8E%E5%8D%95%E8%B0%83%E6%A0%88">12. 栈与单调栈</a></li>
+<li><a href="#13-%E5%A0%86%E4%B8%8E%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97">13. 堆与优先队列</a></li>
+<li><a href="#14-%E8%B4%AA%E5%BF%83%E7%AD%96%E7%95%A5">14. 贪心策略</a></li>
+<li><a href="#15-%E7%BA%BF%E6%80%A7--%E8%83%8C%E5%8C%85%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92">15. 线性 &#x2F; 背包动态规划</a></li>
+<li><a href="#16-%E5%A4%9A%E7%BB%B4%E4%B8%8E%E5%8C%BA%E9%97%B4%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92">16. 多维与区间动态规划</a></li>
+<li><a href="#17-%E4%BD%8D%E8%BF%90%E7%AE%97%E4%B8%8E%E7%BB%8F%E5%85%B8%E6%8A%80%E5%B7%A7">17. 位运算与经典技巧</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%9B%E5%8D%81%E5%A4%A7%E9%81%BF%E5%9D%91%E9%98%B2%E6%9A%B4%E9%9B%B7%E6%B8%85%E5%8D%95checklist">十大避坑防暴雷清单（CheckList）</a></li>
+<li><a href="#%E4%BA%94%E4%B8%A4%E6%97%A5%E6%9E%81%E9%80%9F%E9%80%9A%E5%85%B3%E6%89%A7%E8%A1%8C%E5%BF%83%E6%B3%95">两日极速通关执行心法</a></li>
+</ol>
+<hr>
+<h2 id="一、解题模式识别矩阵（条件反射速查）"><a href="#一、解题模式识别矩阵（条件反射速查）" class="headerlink" title="一、解题模式识别矩阵（条件反射速查）"></a>一、解题模式识别矩阵（条件反射速查）</h2><p>看到以下题面关键字，在 3 秒内映射到对应工具与套路：</p>
+<table>
+<thead>
+<tr>
+<th align="left">题目特征 &#x2F; 关键字</th>
+<th align="left">第一条件反射</th>
+<th align="left">经典备选 &#x2F; 优化手段</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>无序数组求和为 $K$ &#x2F; 连续子数组</strong></td>
+<td align="left">前缀和 + 哈希表（预置 <code>mp[0] = 1</code>）</td>
+<td align="left">滑动窗口（仅限全正数）</td>
+</tr>
+<tr>
+<td align="left"><strong>无序数组求最长连续序列长度</strong></td>
+<td align="left"><code>unordered_set</code>，仅当 <code>num - 1</code> 不存在时展开</td>
+<td align="left">并查集（通常较重）</td>
+</tr>
+<tr>
+<td align="left"><strong>有序数组两数&#x2F;三数之和</strong></td>
+<td align="left">双指针（对撞指针），外层排序去重</td>
+<td align="left">哈希表</td>
+</tr>
+<tr>
+<td align="left"><strong>连续子数组最长&#x2F;最短满足某条件</strong></td>
+<td align="left">不定长滑动窗口（右移进窗，左移缩窗）</td>
+<td align="left">二分答案 + 校验</td>
+</tr>
+<tr>
+<td align="left"><strong>固定长度窗口的最大&#x2F;最小&#x2F;频数</strong></td>
+<td align="left">定长滑动窗口（<code>i &gt;= k - 1</code> 时收缩左边界）</td>
+<td align="left">计数数组 (26&#x2F;128)</td>
+</tr>
+<tr>
+<td align="left"><strong>滑动窗口内的最大值 &#x2F; 最小值</strong></td>
+<td align="left">单调队列 (<code>std::deque</code> 存下标)</td>
+<td align="left">堆（延迟删除） &#x2F; <code>multiset</code></td>
+</tr>
+<tr>
+<td align="left"><strong>下一个更大 &#x2F; 更小元素</strong></td>
+<td align="left">单调栈（求下一个更大用单调递减栈）</td>
+<td align="left">暴力向前搜</td>
+</tr>
+<tr>
+<td align="left"><strong>数组元素在 $[1, n]$ 范围内找缺失&#x2F;重复</strong></td>
+<td align="left">原地哈希（<code>nums[nums[i]-1] = nums[i]</code>）</td>
+<td align="left">标记符号（负数标记）</td>
+</tr>
+<tr>
+<td align="left"><strong>链表找中点 &#x2F; 环形链表入口</strong></td>
+<td align="left">快慢指针（慢步 1，快步 2；相遇后 head 同步走）</td>
+<td align="left">哈希表（空间 $O(n)$）</td>
+</tr>
+<tr>
+<td align="left"><strong>反转局部区间链表 &#x2F; K 个一组反转</strong></td>
+<td align="left">虚拟哨兵头 + 局部头插法 &#x2F; 迭代穿针引线</td>
+<td align="left">递归（容易爆栈&#x2F;边界繁琐）</td>
+</tr>
+<tr>
+<td align="left"><strong>二叉树求最大深度 &#x2F; 路径和</strong></td>
+<td align="left">自底向上树形 DP（后序遍历，返回单侧贡献）</td>
+<td align="left">全局变量传参更新</td>
+</tr>
+<tr>
+<td align="left"><strong>二叉树层级遍历 &#x2F; 最短步数转移</strong></td>
+<td align="left">队列 BFS（按层 <code>sz = q.size()</code> 遍历）</td>
+<td align="left">DFS 带 <code>depth</code> 参数</td>
+</tr>
+<tr>
+<td align="left"><strong>网格图连通块 &#x2F; 封闭岛屿</strong></td>
+<td align="left">DFS &#x2F; BFS 沉岛法（将 <code>&#39;1&#39;</code> 涂成 <code>&#39;0&#39;</code>）</td>
+<td align="left">并查集</td>
+</tr>
+<tr>
+<td align="left"><strong>依赖关系先后执行顺序 &#x2F; 环检测</strong></td>
+<td align="left">拓扑排序（入度表 + BFS 队列）</td>
+<td align="left">三色标记法 DFS</td>
+</tr>
+<tr>
+<td align="left"><strong>求所有排列 &#x2F; 子集 &#x2F; 组合（$N \le 15$）</strong></td>
+<td align="left">回溯算法（选&#x2F;不选，或枚举起点；排序去重）</td>
+<td align="left">二进制状态压缩枚举</td>
+</tr>
+<tr>
+<td align="left"><strong>有序数组 &#x2F; 旋转有序 &#x2F; 查找边界</strong></td>
+<td align="left">二分查找（明确维护闭区间 <code>[left, right]</code>）</td>
+<td align="left"><code>std::lower_bound</code></td>
+</tr>
+<tr>
+<td align="left"><strong>数据流实时取中位数</strong></td>
+<td align="left">对顶堆（大根堆维护前半段，小根堆维护后半段）</td>
+<td align="left">平衡二叉搜索树</td>
+</tr>
+<tr>
+<td align="left"><strong>Top K 大 &#x2F; 小元素</strong></td>
+<td align="left"><code>std::nth_element</code> (快速选择) &#x2F; 维护大小为 $K$ 的堆</td>
+<td align="left">计数桶排序</td>
+</tr>
+<tr>
+<td align="left"><strong>最长递增子序列 (LIS)</strong></td>
+<td align="left">贪心 + 二分（耐心排序法：<code>tails</code> 数组二分替换）</td>
+<td align="left">$O(n^2)$ 动态规划</td>
+</tr>
+<tr>
+<td align="left"><strong>重叠区间合并 &#x2F; 安排最多互不冲突区间</strong></td>
+<td align="left">按左端点&#x2F;右端点排序 + 贪心扫描维护边界</td>
+<td align="left">差分数组</td>
+</tr>
+<tr>
+<td align="left"><strong>出现奇数次&#x2F;唯一的数字</strong></td>
+<td align="left">异或运算 $a \oplus a &#x3D; 0$</td>
+<td align="left">计数哈希</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、现代-C-STL-刷题核心肌肉记忆"><a href="#二、现代-C-STL-刷题核心肌肉记忆" class="headerlink" title="二、现代 C++ STL 刷题核心肌肉记忆"></a>二、现代 C++ STL 刷题核心肌肉记忆</h2><h3 id="1-泛型递归-Lambda（C-14-起支持，告别类成员或全局函数）"><a href="#1-泛型递归-Lambda（C-14-起支持，告别类成员或全局函数）" class="headerlink" title="1. 泛型递归 Lambda（C++14 起支持，告别类成员或全局函数）"></a>1. 泛型递归 Lambda（C++14 起支持，告别类成员或全局函数）</h3><p>无需声明 <code>std::function</code>（无任何函数指针或类型擦除开销，效率等同内联函数）：</p>
+<pre><code class="cpp">// 模版：通过 auto&amp; self 显式传递自身
+auto dfs = [&amp;](auto&amp; self, int u, int p) -&gt; void &#123;
+    for (int v : adj[u]) &#123;
+        if (v == p) continue;
+        self(self, v, u);
+    &#125;
+&#125;;
+dfs(dfs, root, -1);
+</code></pre>
+<h3 id="2-优先队列（堆）的三种高效姿势"><a href="#2-优先队列（堆）的三种高效姿势" class="headerlink" title="2. 优先队列（堆）的三种高效姿势"></a>2. 优先队列（堆）的三种高效姿势</h3><pre><code class="cpp">// 1. 基础小根堆
+priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; minHeap;
+
+// 2. 带权 Pair 堆（默认按 pair.first 升序）
+using pii = pair&lt;int, int&gt;;
+priority_queue&lt;pii, vector&lt;pii&gt;, greater&lt;pii&gt;&gt; pq;
+
+// 3. 自定义 Lambda 比较器 (注意：堆中比较函数返回 true 表示后者优先级更高，即降序排列)
+auto cmp = [](const auto&amp; a, const auto&amp; b) &#123;
+    return a.weight &gt; b.weight; // 小根堆：weight 小的在 top
+&#125;;
+priority_queue&lt;Node, vector&lt;Node&gt;, decltype(cmp)&gt; pqCustom(cmp);
+</code></pre>
+<h3 id="3-二分利器：std-lower-bound-与-std-upper-bound"><a href="#3-二分利器：std-lower-bound-与-std-upper-bound" class="headerlink" title="3. 二分利器：std::lower_bound 与 std::upper_bound"></a>3. 二分利器：<code>std::lower_bound</code> 与 <code>std::upper_bound</code></h3><ul>
+<li><code>lower_bound(beg, end, val)</code>：返回指向 <strong>第一个 $\ge val$</strong> 元素的迭代器。</li>
+<li><code>upper_bound(beg, end, val)</code>：返回指向 <strong>第一个 $&gt; val$</strong> 元素的迭代器。</li>
+<li>获取下标：<code>int idx = lower_bound(nums.begin(), nums.end(), target) - nums.begin();</code></li>
+<li>查找区间数量：<code>[lower_bound, upper_bound)</code> 构成了所有等于 $val$ 的元素区间。</li>
+</ul>
+<h3 id="4-字符串与字符频数数组（极致常数优化）"><a href="#4-字符串与字符频数数组（极致常数优化）" class="headerlink" title="4. 字符串与字符频数数组（极致常数优化）"></a>4. 字符串与字符频数数组（极致常数优化）</h3><p>对纯英文小写字符题目，坚决不用 <code>unordered_map&lt;char, int&gt;</code>，使用固定大小数组：</p>
+<pre><code class="cpp">// 零堆内存开销，缓存极度友好
+int cnt[26]&#123;&#125;; 
+cnt[c - &#39;a&#39;]++;
+// 判断两频数数组是否一致可直接用 std::equal 或 cnt1 == cnt2 (若封装为 array&lt;int, 26&gt;)
+</code></pre>
+<h3 id="5-无符号数下溢天坑（Unsigned-Underflow）"><a href="#5-无符号数下溢天坑（Unsigned-Underflow）" class="headerlink" title="5. 无符号数下溢天坑（Unsigned Underflow）"></a>5. 无符号数下溢天坑（Unsigned Underflow）</h3><ul>
+<li><code>vec.size()</code> 返回 <code>size_t</code> (无符号整数)！</li>
+<li><strong>天坑写法</strong>：<code>for (int i = 0; i &lt;= (int)vec.size() - 2; ++i)</code><br>若不加 <code>(int)</code> 强制转换且 <code>vec</code> 为空，<code>vec.size() - 2</code> 会回绕为超大正整数，导致死循环或越界崩溃。</li>
+</ul>
+<hr>
+<h2 id="三、17-大专题母题套路与核心代码骨架"><a href="#三、17-大专题母题套路与核心代码骨架" class="headerlink" title="三、17 大专题母题套路与核心代码骨架"></a>三、17 大专题母题套路与核心代码骨架</h2><h3 id="1-哈希"><a href="#1-哈希" class="headerlink" title="1. 哈希"></a>1. 哈希</h3><h4 id="母题-128-最长连续序列"><a href="#母题-128-最长连续序列" class="headerlink" title="母题 128. 最长连续序列"></a>母题 128. 最长连续序列</h4><ul>
+<li><strong>题眼</strong>：要求 $O(n)$ 时间内找到最长连续整数序列。</li>
+<li><strong>破局点</strong>：只有当 <code>num - 1</code> 不在哈希集中时，<code>num</code> 才能作为连续序列的起点；否则跳过，避免重复向后暴力统计。</li>
+</ul>
+<pre><code class="cpp">int longestConsecutive(vector&lt;int&gt;&amp; nums) &#123;
+    unordered_set&lt;int&gt; numSet(nums.begin(), nums.end());
+    int maxLen = 0;
+    for (int num : numSet) &#123;
+        if (!numSet.count(num - 1)) &#123; // 仅从起点开始拓展
+            int curNum = num;
+            int curLen = 1;
+            while (numSet.count(curNum + 1)) &#123;
+                curNum++;
+                curLen++;
+            &#125;
+            maxLen = max(maxLen, curLen);
+        &#125;
+    &#125;
+    return maxLen;
+&#125;
+</code></pre>
+<hr>
+<h3 id="2-双指针"><a href="#2-双指针" class="headerlink" title="2. 双指针"></a>2. 双指针</h3><h4 id="母题-015-三数之和"><a href="#母题-015-三数之和" class="headerlink" title="母题 015. 三数之和"></a>母题 015. 三数之和</h4><ul>
+<li><strong>题眼</strong>：排序 + 对撞双指针 + 双重去重。</li>
+<li><strong>破局点</strong>：固定外层 $i$ 后，双指针 $L$ 和 $R$ 对撞；关键在去重逻辑必须跨过连续相等元素。</li>
+</ul>
+<pre><code class="cpp">vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;&amp; nums) &#123;
+    sort(nums.begin(), nums.end());
+    int n = nums.size();
+    vector&lt;vector&lt;int&gt;&gt; ans;
+    for (int i = 0; i &lt; n - 2; ++i) &#123;
+        if (nums[i] &gt; 0) break; // 优化：首数大于 0 则三数之和必大于 0
+        if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1]) continue; // 第一层去重
+        int L = i + 1, R = n - 1;
+        while (L &lt; R) &#123;
+            int sum = nums[i] + nums[L] + nums[R];
+            if (sum &lt; 0) L++;
+            else if (sum &gt; 0) R--;
+            else &#123;
+                ans.push_back(&#123;nums[i], nums[L], nums[R]&#125;);
+                while (L &lt; R &amp;&amp; nums[L] == nums[L + 1]) L++; // L去重
+                while (L &lt; R &amp;&amp; nums[R] == nums[R - 1]) R--; // R去重
+                L++; R--;
+            &#125;
+        &#125;
+    &#125;
+    return ans;
+&#125;
+</code></pre>
+<h4 id="母题-042-接雨水-双指针法"><a href="#母题-042-接雨水-双指针法" class="headerlink" title="母题 042. 接雨水 (双指针法)"></a>母题 042. 接雨水 (双指针法)</h4><ul>
+<li><strong>破局点</strong>：接雨水量由 <code>min(max_left, max_right) - height[i]</code> 决定。维护左右两侧的前缀最大值，哪侧小就结算哪侧并向内收缩。</li>
+</ul>
+<pre><code class="cpp">int trap(vector&lt;int&gt;&amp; height) &#123;
+    int L = 0, R = height.size() - 1;
+    int leftMax = 0, rightMax = 0, ans = 0;
+    while (L &lt; R) &#123;
+        leftMax = max(leftMax, height[L]);
+        rightMax = max(rightMax, height[R]);
+        if (leftMax &lt; rightMax) &#123;
+            ans += leftMax - height[L];
+            L++;
+        &#125; else &#123;
+            ans += rightMax - height[R];
+            R--;
+        &#125;
+    &#125;
+    return ans;
+&#125;
+</code></pre>
+<hr>
+<h3 id="3-滑动窗口"><a href="#3-滑动窗口" class="headerlink" title="3. 滑动窗口"></a>3. 滑动窗口</h3><h4 id="滑动窗口万能模版（不定长最长-最短子串）"><a href="#滑动窗口万能模版（不定长最长-最短子串）" class="headerlink" title="滑动窗口万能模版（不定长最长&#x2F;最短子串）"></a>滑动窗口万能模版（不定长最长&#x2F;最短子串）</h4><pre><code class="cpp">int left = 0, right = 0;
+while (right &lt; n) &#123;
+    // 1. 扩大窗口：将 nums[right] 纳入状态
+    char c = s[right++];
+    window[c]++;
+    
+    // 2. 条件不满足时，收缩窗口
+    while (/* 窗口需要收缩的条件 */) &#123;
+        char d = s[left++];
+        window[d]--;
+        // 更新收缩状态
+    &#125;
+    
+    // 3. 更新答案 (依据题意求最大/最小)
+    ans = max(ans, right - left);
+&#125;
+</code></pre>
+<h4 id="母题-003-无重复字符的最长子串"><a href="#母题-003-无重复字符的最长子串" class="headerlink" title="母题 003. 无重复字符的最长子串"></a>母题 003. 无重复字符的最长子串</h4><pre><code class="cpp">int lengthOfLongestSubstring(string s) &#123;
+    int lastPos[256];
+    memset(lastPos, -1, sizeof(lastPos));
+    int maxLen = 0, left = 0;
+    for (int right = 0; right &lt; (int)s.size(); ++right) &#123;
+        if (lastPos[(unsigned char)s[right]] &gt;= left) &#123;
+            left = lastPos[(unsigned char)s[right]] + 1; // 直接跳跃左指针
+        &#125;
+        lastPos[(unsigned char)s[right]] = right;
+        maxLen = max(maxLen, right - left + 1);
+    &#125;
+    return maxLen;
+&#125;
+</code></pre>
+<hr>
+<h3 id="4-子串与前缀和"><a href="#4-子串与前缀和" class="headerlink" title="4. 子串与前缀和"></a>4. 子串与前缀和</h3><h4 id="母题-560-和为-K-的子数组"><a href="#母题-560-和为-K-的子数组" class="headerlink" title="母题 560. 和为 K 的子数组"></a>母题 560. 和为 K 的子数组</h4><ul>
+<li><strong>题眼</strong>：包含负数数组中找和为 $K$ 的连续子数组数目。不可用双指针&#x2F;滑动窗口！</li>
+<li><strong>破局点</strong>：$sum[i] - sum[j] &#x3D; K \implies sum[j] &#x3D; sum[i] - K$。</li>
+<li><strong>防暴雷点</strong>：必须初始化 <code>prefixFreq[0] = 1</code>（处理前缀本身就等于 $K$ 的情况）。</li>
+</ul>
+<pre><code class="cpp">int subarraySum(vector&lt;int&gt;&amp; nums, int k) &#123;
+    unordered_map&lt;int, int&gt; prefixFreq;
+    prefixFreq[0] = 1;
+    int curSum = 0, count = 0;
+    for (int x : nums) &#123;
+        curSum += x;
+        if (prefixFreq.count(curSum - k)) &#123;
+            count += prefixFreq[curSum - k];
+        &#125;
+        prefixFreq[curSum]++;
+    &#125;
+    return count;
+&#125;
+</code></pre>
+<h4 id="母题-239-滑动窗口最大值（单调队列）"><a href="#母题-239-滑动窗口最大值（单调队列）" class="headerlink" title="母题 239. 滑动窗口最大值（单调队列）"></a>母题 239. 滑动窗口最大值（单调队列）</h4><ul>
+<li><strong>破局点</strong>：单调双端队列 <code>deque</code> 存储下标，维护内部元素数值严格单调递减。</li>
+</ul>
+<pre><code class="cpp">vector&lt;int&gt; maxSlidingWindow(vector&lt;int&gt;&amp; nums, int k) &#123;
+    deque&lt;int&gt; dq; // 存下标
+    vector&lt;int&gt; ans;
+    for (int i = 0; i &lt; (int)nums.size(); ++i) &#123;
+        // 1. 弹出队首过期的下标
+        if (!dq.empty() &amp;&amp; dq.front() &lt;= i - k) &#123;
+            dq.pop_front();
+        &#125;
+        // 2. 维护单调递减性质：凡是小于当前元素的队尾元素全弹出
+        while (!dq.empty() &amp;&amp; nums[dq.back()] &lt;= nums[i]) &#123;
+            dq.pop_back();
+        &#125;
+        dq.push_back(i);
+        // 3. 达到窗口大小 k 时记录结果
+        if (i &gt;= k - 1) &#123;
+            ans.push_back(nums[dq.front()]);
+        &#125;
+    &#125;
+    return ans;
+&#125;
+</code></pre>
+<hr>
+<h3 id="5-普通数组操作"><a href="#5-普通数组操作" class="headerlink" title="5. 普通数组操作"></a>5. 普通数组操作</h3><h4 id="母题-041-缺失的第一个正数（原地哈希）"><a href="#母题-041-缺失的第一个正数（原地哈希）" class="headerlink" title="母题 041. 缺失的第一个正数（原地哈希）"></a>母题 041. 缺失的第一个正数（原地哈希）</h4><ul>
+<li><strong>破局点</strong>：长度为 $N$ 的数组，缺失的最小正整数必在 $[1, N + 1]$ 之间。原地将值 $x \in [1, N]$ 置换到下标 $x - 1$ 的位置。</li>
+</ul>
+<pre><code class="cpp">int firstMissingPositive(vector&lt;int&gt;&amp; nums) &#123;
+    int n = nums.size();
+    for (int i = 0; i &lt; n; ++i) &#123;
+        // 当 nums[i] 处于有效范围 [1, n]，且没有归位时，不断交换归位
+        while (nums[i] &gt;= 1 &amp;&amp; nums[i] &lt;= n &amp;&amp; nums[nums[i] - 1] != nums[i]) &#123;
+            swap(nums[i], nums[nums[i] - 1]);
+        &#125;
+    &#125;
+    for (int i = 0; i &lt; n; ++i) &#123;
+        if (nums[i] != i + 1) return i + 1;
+    &#125;
+    return n + 1;
+&#125;
+</code></pre>
+<h4 id="母题-189-轮转数组"><a href="#母题-189-轮转数组" class="headerlink" title="母题 189. 轮转数组"></a>母题 189. 轮转数组</h4><ul>
+<li><strong>破局点</strong>：三次翻转法。$k &#x3D; k \pmod n$。整体翻转 $\to$ 翻转前 $k$ 个 $\to$ 翻转后 $n - k$ 个。</li>
+</ul>
+<pre><code class="cpp">void rotate(vector&lt;int&gt;&amp; nums, int k) &#123;
+    k %= nums.size();
+    reverse(nums.begin(), nums.end());
+    reverse(nums.begin(), nums.begin() + k);
+    reverse(nums.begin() + k, nums.end());
+&#125;
+</code></pre>
+<hr>
+<h3 id="6-矩阵操作"><a href="#6-矩阵操作" class="headerlink" title="6. 矩阵操作"></a>6. 矩阵操作</h3><h4 id="母题-054-螺旋矩阵（四界收缩）"><a href="#母题-054-螺旋矩阵（四界收缩）" class="headerlink" title="母题 054. 螺旋矩阵（四界收缩）"></a>母题 054. 螺旋矩阵（四界收缩）</h4><ul>
+<li><strong>破局点</strong>：定义 <code>top, bottom, left, right</code> 四个边界，顺时针打印一圈后收缩对应边界，并立即检查是否相交。</li>
+</ul>
+<pre><code class="cpp">vector&lt;int&gt; spiralOrder(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) &#123;
+    vector&lt;int&gt; ans;
+    int top = 0, bottom = matrix.size() - 1;
+    int left = 0, right = matrix[0].size() - 1;
+    while (true) &#123;
+        for (int j = left; j &lt;= right; ++j) ans.push_back(matrix[top][j]);
+        if (++top &gt; bottom) break;
+        for (int i = top; i &lt;= bottom; ++i) ans.push_back(matrix[i][right]);
+        if (--right &lt; left) break;
+        for (int j = right; j &gt;= left; --j) ans.push_back(matrix[bottom][j]);
+        if (--bottom &lt; top) break;
+        for (int i = bottom; i &gt;= top; --i) ans.push_back(matrix[i][left]);
+        if (++left &gt; right) break;
+    &#125;
+    return ans;
+&#125;
+</code></pre>
+<hr>
+<h3 id="7-链表核心模版"><a href="#7-链表核心模版" class="headerlink" title="7. 链表核心模版"></a>7. 链表核心模版</h3><h4 id="核心利器：虚拟头节点（Dummy-Head）"><a href="#核心利器：虚拟头节点（Dummy-Head）" class="headerlink" title="核心利器：虚拟头节点（Dummy Head）"></a>核心利器：虚拟头节点（Dummy Head）</h4><p>只要链表头节点可能被修改&#x2F;删除，第一件事先建立哨兵头：</p>
+<pre><code class="cpp">ListNode dummy(0, head);
+ListNode* prev = &amp;dummy;
+</code></pre>
+<h4 id="母题-206-反转链表"><a href="#母题-206-反转链表" class="headerlink" title="母题 206. 反转链表"></a>母题 206. 反转链表</h4><pre><code class="cpp">ListNode* reverseList(ListNode* head) &#123;
+    ListNode* prev = nullptr;
+    ListNode* curr = head;
+    while (curr) &#123;
+        ListNode* nxt = curr-&gt;next;
+        curr-&gt;next = prev;
+        prev = curr;
+        curr = nxt;
+    &#125;
+    return prev;
+&#125;
+</code></pre>
+<h4 id="母题-025-K-个一组翻转链表"><a href="#母题-025-K-个一组翻转链表" class="headerlink" title="母题 025. K 个一组翻转链表"></a>母题 025. K 个一组翻转链表</h4><ul>
+<li><strong>破局点</strong>：先数够 $K$ 个，不够则不翻转直接返回；够 $K$ 个则局部翻转，前接后挂。</li>
+</ul>
+<pre><code class="cpp">ListNode* reverseKGroup(ListNode* head, int k) &#123;
+    ListNode dummy(0, head);
+    ListNode* prev = &amp;dummy;
+    ListNode* end = &amp;dummy;
+
+    while (end-&gt;next) &#123;
+        for (int i = 0; i &lt; k &amp;&amp; end; ++i) end = end-&gt;next;
+        if (!end) break;
+        ListNode* start = prev-&gt;next;
+        ListNode* nextGroup = end-&gt;next;
+        end-&gt;next = nullptr; // 断开局部链表
+
+        prev-&gt;next = reverseList(start); // 翻转这 k 个节点
+        start-&gt;next = nextGroup; // 翻转后 start 变尾节点，缝合后半段
+        prev = start;
+        end = start;
+    &#125;
+    return dummy.next;
+&#125;
+</code></pre>
+<h4 id="母题-142-环形链表-II（快慢指针推导）"><a href="#母题-142-环形链表-II（快慢指针推导）" class="headerlink" title="母题 142. 环形链表 II（快慢指针推导）"></a>母题 142. 环形链表 II（快慢指针推导）</h4><ul>
+<li><strong>原理</strong>：快指针走 $2s$，慢指针走 $s$，相遇时 $2s - s &#x3D; nb \implies s &#x3D; nb$。</li>
+<li>入环点公式：头节点到入环点为 $a$ 步，则 $a + nb$ 处也是入环点。相遇后，慢指针从头开始，快指针原地出发，每次 1 步，再次相遇即为入环点。</li>
+</ul>
+<hr>
+<h3 id="8-二叉树与递归"><a href="#8-二叉树与递归" class="headerlink" title="8. 二叉树与递归"></a>8. 二叉树与递归</h3><p>二叉树的核心心法：<strong>思考当前节点（root）该做什么，何时做（前序&#x2F;中序&#x2F;后序），需要子树返回什么信息。</strong></p>
+<h4 id="母题-236-二叉树的最近公共祖先-LCA"><a href="#母题-236-二叉树的最近公共祖先-LCA" class="headerlink" title="母题 236. 二叉树的最近公共祖先 (LCA)"></a>母题 236. 二叉树的最近公共祖先 (LCA)</h4><pre><code class="cpp">TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) &#123;
+    if (!root || root == p || root == q) return root;
+    TreeNode* left = lowestCommonAncestor(root-&gt;left, p, q);
+    TreeNode* right = lowestCommonAncestor(root-&gt;right, p, q);
+    if (left &amp;&amp; right) return root; // p 和 q 分布在左右子树，当前就是 LCA
+    return left ? left : right;     // 都在一侧，返回非空侧
+&#125;
+</code></pre>
+<h4 id="母题-124-二叉树中的最大路径和（自底向上贡献模型）"><a href="#母题-124-二叉树中的最大路径和（自底向上贡献模型）" class="headerlink" title="母题 124. 二叉树中的最大路径和（自底向上贡献模型）"></a>母题 124. 二叉树中的最大路径和（自底向上贡献模型）</h4><pre><code class="cpp">int maxPathSum(TreeNode* root) &#123;
+    int maxSum = INT_MIN;
+    auto dfs = [&amp;](auto&amp; self, TreeNode* node) -&gt; int &#123;
+        if (!node) return 0;
+        int leftGain = max(0, self(self, node-&gt;left));   // 若贡献为负则舍弃
+        int rightGain = max(0, self(self, node-&gt;right));
+        
+        // 拐弯穿过当前节点的最大路径，更新全局最优
+        maxSum = max(maxSum, node-&gt;val + leftGain + rightGain);
+        
+        // 向父节点只能贡献单侧分支
+        return node-&gt;val + max(leftGain, rightGain);
+    &#125;;
+    dfs(dfs, root);
+    return maxSum;
+&#125;
+</code></pre>
+<hr>
+<h3 id="9-图论（网格与拓扑）"><a href="#9-图论（网格与拓扑）" class="headerlink" title="9. 图论（网格与拓扑）"></a>9. 图论（网格与拓扑）</h3><h4 id="母题-200-岛屿数量（沉岛-DFS）"><a href="#母题-200-岛屿数量（沉岛-DFS）" class="headerlink" title="母题 200. 岛屿数量（沉岛 DFS）"></a>母题 200. 岛屿数量（沉岛 DFS）</h4><pre><code class="cpp">int numIslands(vector&lt;vector&lt;char&gt;&gt;&amp; grid) &#123;
+    int m = grid.size(), n = grid[0].size();
+    auto dfs = [&amp;](auto&amp; self, int r, int c) -&gt; void &#123;
+        if (r &lt; 0 || r &gt;= m || c &lt; 0 || c &gt;= n || grid[r][c] != &#39;1&#39;) return;
+        grid[r][c] = &#39;0&#39;; // 沉岛标记
+        self(self, r + 1, c);
+        self(self, r - 1, c);
+        self(self, r, c + 1);
+        self(self, r, c - 1);
+    &#125;;
+
+    int count = 0;
+    for (int i = 0; i &lt; m; ++i) &#123;
+        for (int j = 0; j &lt; n; ++j) &#123;
+            if (grid[i][j] == &#39;1&#39;) &#123;
+                count++;
+                dfs(dfs, i, j);
+            &#125;
+        &#125;
+    &#125;
+    return count;
+&#125;
+</code></pre>
+<h4 id="母题-207-课程表（Kahn-算法拓扑排序）"><a href="#母题-207-课程表（Kahn-算法拓扑排序）" class="headerlink" title="母题 207. 课程表（Kahn 算法拓扑排序）"></a>母题 207. 课程表（Kahn 算法拓扑排序）</h4><ul>
+<li><strong>破局点</strong>：计算入度 <code>inDegree</code>，入度为 0 的节点入队 BFS，出队时消减邻接点入度。若出队总数等于总课程数，则无环。</li>
+</ul>
+<pre><code class="cpp">bool canFinish(int numCourses, vector&lt;vector&lt;int&gt;&gt;&amp; prerequisites) &#123;
+    vector&lt;vector&lt;int&gt;&gt; adj(numCourses);
+    vector&lt;int&gt; inDegree(numCourses, 0);
+    for (const auto&amp; pre : prerequisites) &#123;
+        adj[pre[1]].push_back(pre[0]);
+        inDegree[pre[0]]++;
+    &#125;
+    queue&lt;int&gt; q;
+    for (int i = 0; i &lt; numCourses; ++i) &#123;
+        if (inDegree[i] == 0) q.push(i);
+    &#125;
+    int visited = 0;
+    while (!q.empty()) &#123;
+        int u = q.front(); q.pop();
+        visited++;
+        for (int v : adj[u]) &#123;
+            if (--inDegree[v] == 0) q.push(v);
+        &#125;
+    &#125;
+    return visited == numCourses;
+&#125;
+</code></pre>
+<hr>
+<h3 id="10-回溯算法模版"><a href="#10-回溯算法模版" class="headerlink" title="10. 回溯算法模版"></a>10. 回溯算法模版</h3><p>回溯两大母体形态：</p>
+<ol>
+<li><strong>子集&#x2F;组合型</strong>：传递 <code>startIndex</code>，去重时先排序，<code>if (i &gt; startIndex &amp;&amp; nums[i] == nums[i - 1]) continue;</code></li>
+<li><strong>排列型</strong>：传递 <code>used</code> 数组，去重时 <code>if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1] &amp;&amp; !used[i - 1]) continue;</code></li>
+</ol>
+<h4 id="子集与组合总和去重模版（以-039-040-为例）"><a href="#子集与组合总和去重模版（以-039-040-为例）" class="headerlink" title="子集与组合总和去重模版（以 039&#x2F;040 为例）"></a>子集与组合总和去重模版（以 039&#x2F;040 为例）</h4><pre><code class="cpp">void backtrack(const vector&lt;int&gt;&amp; nums, int start, int target, vector&lt;int&gt;&amp; path, vector&lt;vector&lt;int&gt;&gt;&amp; ans) &#123;
+    if (target == 0) &#123;
+        ans.push_back(path);
+        return;
+    &#125;
+    for (int i = start; i &lt; (int)nums.size(); ++i) &#123;
+        if (nums[i] &gt; target) break; // 剪枝
+        if (i &gt; start &amp;&amp; nums[i] == nums[i - 1]) continue; // 同层去重！
+        path.push_back(nums[i]);
+        backtrack(nums, i + 1, target - nums[i], path, ans); // 若元素可复用则传 i
+        path.pop_back(); // 撤销选择
+    &#125;
+&#125;
+</code></pre>
+<hr>
+<h3 id="11-二分查找全场景"><a href="#11-二分查找全场景" class="headerlink" title="11. 二分查找全场景"></a>11. 二分查找全场景</h3><h4 id="黄金法则：闭区间-left-right-模版（绝不死循环）"><a href="#黄金法则：闭区间-left-right-模版（绝不死循环）" class="headerlink" title="黄金法则：闭区间 [left, right] 模版（绝不死循环）"></a>黄金法则：闭区间 <code>[left, right]</code> 模版（绝不死循环）</h4><pre><code class="cpp">int left = 0, right = (int)nums.size() - 1;
+int ans = -1;
+while (left &lt;= right) &#123;
+    int mid = left + (right - left) / 2;
+    if (check(mid)) &#123;
+        ans = mid;        // 记录可行解
+        right = mid - 1;  // 继续往左逼近更小解 (找左边界)
+    &#125; else &#123;
+        left = mid + 1;
+    &#125;
+&#125;
+</code></pre>
+<h4 id="母题-033-搜索旋转排序数组"><a href="#母题-033-搜索旋转排序数组" class="headerlink" title="母题 033. 搜索旋转排序数组"></a>母题 033. 搜索旋转排序数组</h4><ul>
+<li><strong>破局点</strong>：旋转数组折半后，<strong>必有一半是严格单调有序的</strong>！</li>
+</ul>
+<pre><code class="cpp">int search(vector&lt;int&gt;&amp; nums, int target) &#123;
+    int left = 0, right = (int)nums.size() - 1;
+    while (left &lt;= right) &#123;
+        int mid = left + (right - left) / 2;
+        if (nums[mid] == target) return mid;
+        
+        // 判断左半部分是否有序
+        if (nums[left] &lt;= nums[mid]) &#123;
+            if (nums[left] &lt;= target &amp;&amp; target &lt; nums[mid]) &#123;
+                right = mid - 1; // target 在有序左半段
+            &#125; else &#123;
+                left = mid + 1;
+            &#125;
+        &#125; else &#123; // 右半部分有序
+            if (nums[mid] &lt; target &amp;&amp; target &lt;= nums[right]) &#123;
+                left = mid + 1;  // target 在有序右半段
+            &#125; else &#123;
+                right = mid - 1;
+            &#125;
+        &#125;
+    &#125;
+    return -1;
+&#125;
+</code></pre>
+<hr>
+<h3 id="12-栈与单调栈"><a href="#12-栈与单调栈" class="headerlink" title="12. 栈与单调栈"></a>12. 栈与单调栈</h3><h4 id="单调栈适用场景：寻找数组中每个元素“下一个更大”或“下一个更小”的元素。"><a href="#单调栈适用场景：寻找数组中每个元素“下一个更大”或“下一个更小”的元素。" class="headerlink" title="单调栈适用场景：寻找数组中每个元素“下一个更大”或“下一个更小”的元素。"></a>单调栈适用场景：寻找数组中每个元素“下一个更大”或“下一个更小”的元素。</h4><ul>
+<li>找下一个更大 $\to$ 单调递减栈（栈底大，栈顶小，遇到比栈顶大的立即弹出结算）。</li>
+<li>找下一个更小 $\to$ 单调递增栈。</li>
+</ul>
+<h4 id="母题-084-柱状图中最大的矩形（首尾加哨兵）"><a href="#母题-084-柱状图中最大的矩形（首尾加哨兵）" class="headerlink" title="母题 084. 柱状图中最大的矩形（首尾加哨兵）"></a>母题 084. 柱状图中最大的矩形（首尾加哨兵）</h4><ul>
+<li><strong>破局点</strong>：首尾插入高度为 0 的哨兵，既能让最左元素有左边界，又能强制最后清空栈内全部残留柱子。</li>
+</ul>
+<pre><code class="cpp">int largestRectangleArea(vector&lt;int&gt;&amp; heights) &#123;
+    // 左右各加一个高度为 0 的哨兵
+    heights.insert(heights.begin(), 0);
+    heights.push_back(0);
+    stack&lt;int&gt; st; // 存下标，单调递增
+    int maxArea = 0;
+    
+    for (int i = 0; i &lt; (int)heights.size(); ++i) &#123;
+        while (!st.empty() &amp;&amp; heights[i] &lt; heights[st.top()]) &#123;
+            int h = heights[st.top()];
+            st.pop();
+            int w = i - st.top() - 1; // 此时栈顶为左边第一个更小元素的下标
+            maxArea = max(maxArea, h * w);
+        &#125;
+        st.push(i);
+    &#125;
+    return maxArea;
+&#125;
+</code></pre>
+<hr>
+<h3 id="13-堆与优先队列"><a href="#13-堆与优先队列" class="headerlink" title="13. 堆与优先队列"></a>13. 堆与优先队列</h3><h4 id="母题-215-数组中的第-K-个最大元素"><a href="#母题-215-数组中的第-K-个最大元素" class="headerlink" title="母题 215. 数组中的第 K 个最大元素"></a>母题 215. 数组中的第 K 个最大元素</h4><ul>
+<li><strong>解法 1（工程最快）</strong>：C++ 内置快速选择算法 <code>std::nth_element</code>。平均时间复杂度 $O(n)$。</li>
+</ul>
+<pre><code class="cpp">int findKthLargest(vector&lt;int&gt;&amp; nums, int k) &#123;
+    // nth_element 会使目标位置左边都不大于它，右边都不小于它
+    nth_element(nums.begin(), nums.begin() + k - 1, nums.end(), greater&lt;int&gt;());
+    return nums[k - 1];
+&#125;
+</code></pre>
+<ul>
+<li><strong>解法 2（堆）</strong>：维护大小为 $K$ 的小根堆，新元素大于堆顶时入堆换顶。</li>
+</ul>
+<h4 id="母题-295-数据流的中位数（对顶堆）"><a href="#母题-295-数据流的中位数（对顶堆）" class="headerlink" title="母题 295. 数据流的中位数（对顶堆）"></a>母题 295. 数据流的中位数（对顶堆）</h4><ul>
+<li><strong>结构</strong>：大根堆 <code>left</code>（存较小的一半），小根堆 <code>right</code>（存较大的一半）。</li>
+<li><strong>维持平衡</strong>：<code>left.size() == right.size()</code> 或 <code>left.size() == right.size() + 1</code>。</li>
+</ul>
+<hr>
+<h3 id="14-贪心策略"><a href="#14-贪心策略" class="headerlink" title="14. 贪心策略"></a>14. 贪心策略</h3><h4 id="母题-055-045-跳跃游戏"><a href="#母题-055-045-跳跃游戏" class="headerlink" title="母题 055 &#x2F; 045. 跳跃游戏"></a>母题 055 &#x2F; 045. 跳跃游戏</h4><ul>
+<li><strong>破局点</strong>：维护当前能到达的全局最远边界 <code>maxReach</code>。</li>
+</ul>
+<pre><code class="cpp">// 055. 跳跃游戏 I
+bool canJump(vector&lt;int&gt;&amp; nums) &#123;
+    int maxReach = 0;
+    for (int i = 0; i &lt; (int)nums.size(); ++i) &#123;
+        if (i &gt; maxReach) return false;
+        maxReach = max(maxReach, i + nums[i]);
+    &#125;
+    return true;
+&#125;
+</code></pre>
+<hr>
+<h3 id="15-线性-背包动态规划"><a href="#15-线性-背包动态规划" class="headerlink" title="15. 线性 &#x2F; 背包动态规划"></a>15. 线性 &#x2F; 背包动态规划</h3><h4 id="母题-300-最长递增子序列-LIS"><a href="#母题-300-最长递增子序列-LIS" class="headerlink" title="母题 300. 最长递增子序列 (LIS)"></a>母题 300. 最长递增子序列 (LIS)</h4><ul>
+<li><strong>破局点</strong>：$O(n \log n)$ 贪心 + 二分（耐心排序法）。</li>
+<li>维护一个数组 <code>tails</code>，<code>tails[i]</code> 表示长度为 $i+1$ 的递增子序列末尾元素的最小值。</li>
+</ul>
+<pre><code class="cpp">int lengthOfLIS(vector&lt;int&gt;&amp; nums) &#123;
+    vector&lt;int&gt; tails;
+    for (int x : nums) &#123;
+        auto it = lower_bound(tails.begin(), tails.end(), x);
+        if (it == tails.end()) &#123;
+            tails.push_back(x);
+        &#125; else &#123;
+            *it = x; // 贪心替换为更小末尾
+        &#125;
+    &#125;
+    return tails.size();
+&#125;
+</code></pre>
+<h4 id="母题-322-零钱兑换（完全背包求最小硬币数）"><a href="#母题-322-零钱兑换（完全背包求最小硬币数）" class="headerlink" title="母题 322. 零钱兑换（完全背包求最小硬币数）"></a>母题 322. 零钱兑换（完全背包求最小硬币数）</h4><pre><code class="cpp">int coinChange(vector&lt;int&gt;&amp; coins, int amount) &#123;
+    vector&lt;int&gt; dp(amount + 1, amount + 1);
+    dp[0] = 0;
+    for (int coin : coins) &#123;
+        for (int i = coin; i &lt;= amount; ++i) &#123;
+            dp[i] = min(dp[i], dp[i - coin] + 1);
+        &#125;
+    &#125;
+    return dp[amount] &gt; amount ? -1 : dp[amount];
+&#125;
+</code></pre>
+<hr>
+<h3 id="16-多维与区间动态规划"><a href="#16-多维与区间动态规划" class="headerlink" title="16. 多维与区间动态规划"></a>16. 多维与区间动态规划</h3><h4 id="母题-1143-最长公共子序列-LCS"><a href="#母题-1143-最长公共子序列-LCS" class="headerlink" title="母题 1143. 最长公共子序列 (LCS)"></a>母题 1143. 最长公共子序列 (LCS)</h4><ul>
+<li>状态：$dp[i][j]$ 表示 $s1[0..i-1]$ 与 $s2[0..j-1]$ 的 LCS 长度。</li>
+<li>转移方程：<ul>
+<li>若 $s1[i-1] &#x3D;&#x3D; s2[j-1]$：$dp[i][j] &#x3D; dp[i-1][j-1] + 1$</li>
+<li>否则：$dp[i][j] &#x3D; \max(dp[i-1][j], dp[i][j-1])$</li>
+</ul>
+</li>
+</ul>
+<h4 id="母题-072-编辑距离"><a href="#母题-072-编辑距离" class="headerlink" title="母题 072. 编辑距离"></a>母题 072. 编辑距离</h4><ul>
+<li>状态：$dp[i][j]$ 将 $word1[0..i-1]$ 转为 $word2[0..j-1]$ 的最少操作数。</li>
+<li>转移方程：<ul>
+<li>若相等：$dp[i][j] &#x3D; dp[i-1][j-1]$</li>
+<li>若不相等：$1 + \min({dp[i-1][j] \text{ (删除)}, dp[i][j-1] \text{ (插入)}, dp[i-1][j-1] \text{ (替换)}})$</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="17-位运算与经典技巧"><a href="#17-位运算与经典技巧" class="headerlink" title="17. 位运算与经典技巧"></a>17. 位运算与经典技巧</h3><h4 id="经典位运算技巧速查"><a href="#经典位运算技巧速查" class="headerlink" title="经典位运算技巧速查"></a>经典位运算技巧速查</h4><ul>
+<li>清除最低位 1：<code>n = n &amp; (n - 1)</code>（统计二进制 1 的个数常用）</li>
+<li>提取最低位 1：<code>lowbit = n &amp; (-n)</code></li>
+<li>判断 2 的幂：<code>n &gt; 0 &amp;&amp; (n &amp; (n - 1)) == 0</code></li>
+</ul>
+<h4 id="母题-169-多数元素（Boyer-Moore-摩尔投票法）"><a href="#母题-169-多数元素（Boyer-Moore-摩尔投票法）" class="headerlink" title="母题 169. 多数元素（Boyer-Moore 摩尔投票法）"></a>母题 169. 多数元素（Boyer-Moore 摩尔投票法）</h4><ul>
+<li><strong>破局点</strong>：票数抵消。相同加 1，不同减 1，为 0 时重置候选人。时间 $O(n)$，空间 $O(1)$。</li>
+</ul>
+<pre><code class="cpp">int majorityElement(vector&lt;int&gt;&amp; nums) &#123;
+    int candidate = 0, count = 0;
+    for (int num : nums) &#123;
+        if (count == 0) candidate = num;
+        count += (num == candidate) ? 1 : -1;
+    &#125;
+    return candidate;
+&#125;
+</code></pre>
+<h4 id="母题-075-颜色分类（荷兰国旗三路快排）"><a href="#母题-075-颜色分类（荷兰国旗三路快排）" class="headerlink" title="母题 075. 颜色分类（荷兰国旗三路快排）"></a>母题 075. 颜色分类（荷兰国旗三路快排）</h4><pre><code class="cpp">void sortColors(vector&lt;int&gt;&amp; nums) &#123;
+    int p0 = 0, curr = 0, p2 = (int)nums.size() - 1;
+    while (curr &lt;= p2) &#123;
+        if (nums[curr] == 0) &#123;
+            swap(nums[curr++], nums[p0++]);
+        &#125; else if (nums[curr] == 2) &#123;
+            swap(nums[curr], nums[p2--]); // 注意：curr 不自增，交换回来的数还需判断
+        &#125; else &#123;
+            curr++;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<hr>
+<h2 id="四、十大避坑防暴雷清单（CheckList）"><a href="#四、十大避坑防暴雷清单（CheckList）" class="headerlink" title="四、十大避坑防暴雷清单（CheckList）"></a>四、十大避坑防暴雷清单（CheckList）</h2><p>写完代码提交前，花 5 秒钟肉眼扫描以下 10 点：</p>
+<ol>
+<li><input disabled="" type="checkbox"> <strong>整数越界溢出</strong>：<ul>
+<li>二分中点：使用 <code>mid = left + (right - left) / 2</code>，绝不用 <code>(left + right) / 2</code>。</li>
+<li>累乘、平方和、多步相加是否会爆 <code>INT_MAX</code>，必要时开 <code>long long</code>。</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>无符号大小计算下溢</strong>：<ul>
+<li>检查是否有 <code>for (int i = 0; i &lt; (int)vec.size() - 1; ...)</code>。未加 <code>(int)</code> 时，如果 <code>vec</code> 为空，<code>0 - 1</code> 将变成超大正数。</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>前缀和哈希表漏置 0</strong>：<ul>
+<li><code>subarraySum</code> 等前缀和问题，必须初始化 <code>mp[0] = 1</code>，否则会漏掉从下标 0 开始的合法子数组。</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>空指针防护</strong>：<ul>
+<li>链表和二叉树访问 <code>node-&gt;val</code> 或 <code>node-&gt;next</code> 前，是否已先判断 <code>node != nullptr</code>。</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>优先队列比较器方向混淆</strong>：<ul>
+<li>C++ <code>std::greater&lt;T&gt;</code> 在堆中产生的是<strong>小根堆</strong>；返回 <code>true</code> 的节点会被排到堆底。</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>回溯漏撤销现场</strong>：<ul>
+<li><code>path.push_back()</code> 是否在递归返回后严格对应 <code>path.pop_back()</code>；<code>vis[i] = true</code> 后面是否有 <code>vis[i] = false</code>。</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>滑动窗口左右边界边界条件</strong>：<ul>
+<li>保证窗口缩小循环 <code>while (window invalid)</code> 中有 <code>left &lt;= right</code> 保护或逻辑上必然终止。</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>二维矩阵行列大小混淆</strong>：<ul>
+<li>行数 <code>int m = matrix.size();</code>，列数 <code>int n = matrix[0].size();</code>。在判断 <code>matrix.empty()</code> 之前严禁直接取 <code>matrix[0]</code>。</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>图论与多源 BFS 初始化</strong>：<ul>
+<li>多源 BFS 入队时，所有起点必须在入队瞬间立即标记 <code>vis = true</code> 或记录 step，不能等出队时才标记，否则会导致重复入队超时（TLE）。</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>局部变量 vs 全局变量残留</strong>：<ul>
+<li>LeetCode 会连续调用你的类实例执行多组用例，<strong>绝对不要使用全局&#x2F;静态变量</strong>；若写在类私有成员中，每次进入入口函数先执行 <code>clear()</code>。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="五、两日极速通关执行心法"><a href="#五、两日极速通关执行心法" class="headerlink" title="五、两日极速通关执行心法"></a>五、两日极速通关执行心法</h2><pre><code class="text">[打开题目] ──&gt; [读题 1 分钟，提炼核心关键字]
+       │
+       ▼
+[模式矩阵能否在 5 分钟内敲定思路?]
+  ├─ [能闭环] ──&gt; [现代 C++ 快速码出 (5 分钟)] ──&gt; [扫一眼 10 大 CheckList] ──&gt; [提交 AC] ──&gt; [在打卡清单打勾]
+  │
+  └─ [超过 8 分钟卡壳] ──&gt; [立即看题解 (灵神/精选题解)] ──&gt; [提炼核心套路与 STL 肌肉技巧] ──&gt; [关闭题解，独立手写 AC] ──&gt; [在打卡清单打勾]
+</code></pre>
+<h3 id="刷题心法总结："><a href="#刷题心法总结：" class="headerlink" title="刷题心法总结："></a>刷题心法总结：</h3><ul>
+<li><strong>不恋战</strong>：你已有 1700+ 的底子，卡题不是智商不够，而是特定套路的直觉暂时生锈。超过 8 分钟直接看题解，不要内耗。</li>
+<li><strong>抄题解不叫抄，叫重新校准神经元</strong>：看完题解后，<strong>立刻关掉页面闭卷手写一遍</strong>，这才是真正的记忆巩固。</li>
+<li><strong>抓住母题</strong>：Hot 100 中很多是同源题（例如 15 题三数之和与 11 题盛水容器、206 反转链表与 25 题 K 个一组反转），母题吃透，变种题目一秒看破。</li>
+</ul>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2026/10/22/leetcode-hot100-roadmap/" title="LeetCode Hot 100 两日极速通关清单与打卡表"><span class="has-text-weight-semibold">下一页: LeetCode Hot 100 两日极速通关清单与打卡表</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--></section><p class="is-size-7"><span>Copyright ©</span><span> Jerod 2026</span></p><div><span></span></div></footer><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>

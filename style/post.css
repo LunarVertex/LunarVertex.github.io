@@ -31,33 +31,109 @@
   transform: translateY(0);
 }
 
-.post-page .post-content code {
-  border-radius: 4px;
-  background: var(--third-bg-color);
+.post-page .post-content {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  letter-spacing: -0.003em;
+  word-break: break-word;
+}
+.post-page .post-content p {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+.post-page .post-content h1, .post-page .post-content h2, .post-page .post-content h3, .post-page .post-content h4, .post-page .post-content h5, .post-page .post-content h6 {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-top: 2.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.35;
+}
+.post-page .post-content h2 {
+  font-size: 1.55rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border-line-color);
+}
+.post-page .post-content h3 {
+  font-size: 1.25rem;
+}
+.post-page .post-content ul, .post-page .post-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+.post-page .post-content ul li, .post-page .post-content ol li {
+  margin-bottom: 0.45rem;
+  line-height: 1.75;
+}
+.post-page .post-content blockquote {
+  margin: 1.6rem 0;
+  padding: 0.9rem 1.4rem;
+  border-left: 4px solid var(--blockquote-border-color);
+  background: var(--blockquote-bg);
+  border-radius: 0 var(--borderRadius) var(--borderRadius) 0;
+}
+.post-page .post-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+.post-page .post-content code:not(pre code) {
+  font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875em;
+  padding: 0.2em 0.45em;
+  border-radius: 5px;
+  background: var(--code-inline-bg);
+  color: var(--code-inline-color);
+  border: 1px solid var(--code-inline-border);
+  word-break: break-word;
 }
 .post-page .post-content pre {
+  margin: 1.8rem 0;
   padding: 0;
-  background: transparent;
+  border-radius: var(--borderRadius);
+  background: var(--pre-code-bg-color);
+  border: 1px solid var(--pre-code-border);
+  box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.12);
+  position: relative;
+  overflow-x: auto;
+}
+.post-page .post-content pre::-webkit-scrollbar {
+  height: 6px;
+}
+.post-page .post-content pre::-webkit-scrollbar-thumb {
+  background: var(--code-scrollbar-thumb);
+  border-radius: 3px;
+}
+.post-page .post-content pre::-webkit-scrollbar-track {
+  background: var(--code-scrollbar-track);
 }
 .post-page .post-content pre code {
-  padding: 15px;
-  border: 1px solid var(--border-line-color);
-  background: var(--pre-code-bg-color);
-}
-.post-page .post-content .hljs {
-  color: var(--second-text-color);
+  display: block;
+  padding: 18px 22px;
+  font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  border: none;
+  background: transparent !important;
+  color: var(--pre-code-color);
+  overflow-x: auto;
 }
 .post-page .post-content img {
   display: block;
-  margin: 0 auto;
+  margin: 1.5rem auto;
   max-height: 500px;
-  border-radius: 6px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  border-radius: var(--borderRadius);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   opacity: 0;
   will-change: opacity;
 }
 .post-page .post-content a {
   color: #3273dc;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+.post-page .post-content a:hover {
+  opacity: 0.8;
 }
 .post-page .jump-container .button {
   max-width: calc(50% - 5px);

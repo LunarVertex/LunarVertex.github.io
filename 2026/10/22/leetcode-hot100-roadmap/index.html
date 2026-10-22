@@ -1,0 +1,457 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>LeetCode Hot 100 两日极速通关清单与打卡表</title><meta name="description"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+📖 配套通关指南：👉 LeetCode Hot 100 核心母题模式与 C++ STL 秒杀手册 （收录 17 大专题母题套路、条件反射识别矩阵、现代 C++ STL 肌肉记忆与 10 大防暴雷 CheckList）
+目标用户画像：周赛 1700+，有一年空档期，需要唤醒解题直觉与 C++ STL 肌肉记忆。核心原则：
+
+5-10 分钟原则：5 分钟内能明确闭环最优思路与边界条件的，快速心算或手写核心逻辑，打勾过；卡题超过 8 分钟立即看精选题解（如灵神、labuladong），重点记忆解题破局点与 STL 技巧，手写 AC 后打勾。
+分类集中突破：同类型题目连刷，快速强化模式识别能力。
+
+
+
+📅 Day 1: 数据结构基石、搜索与回溯 (50 题)1. 哈希 (3 题)
+ 
+两数之和 (Easy).."><meta name="generator" content="Hexo 7.3.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jerod's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">LeetCode Hot 100 两日极速通关清单与打卡表</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%85-Day-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9F%BA%E7%9F%B3%E3%80%81%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%9E%E6%BA%AF-50-%E9%A2%98"><span class="toc-text">📅 Day 1: 数据结构基石、搜索与回溯 (50 题)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%93%88%E5%B8%8C-3-%E9%A2%98"><span class="toc-text">1. 哈希 (3 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%8C%E6%8C%87%E9%92%88-4-%E9%A2%98"><span class="toc-text">2. 双指针 (4 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-2-%E9%A2%98"><span class="toc-text">3. 滑动窗口 (2 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%AD%90%E4%B8%B2-%E5%89%8D%E7%BC%80%E5%92%8C-3-%E9%A2%98"><span class="toc-text">4. 子串 &#x2F; 前缀和 (3 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%99%AE%E9%80%9A%E6%95%B0%E7%BB%84-5-%E9%A2%98"><span class="toc-text">5. 普通数组 (5 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%9F%A9%E9%98%B5-4-%E9%A2%98"><span class="toc-text">6. 矩阵 (4 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E9%93%BE%E8%A1%A8-14-%E9%A2%98"><span class="toc-text">7. 链表 (14 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E4%BA%8C%E5%8F%89%E6%A0%91-15-%E9%A2%98"><span class="toc-text">8. 二叉树 (15 题)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%85-Day-2-%E6%90%9C%E7%B4%A2%E5%9B%9E%E6%BA%AF%E8%BF%9B%E9%98%B6%E3%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E3%80%81%E8%BF%9B%E9%98%B6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%8A%80%E5%B7%A7-50-%E9%A2%98"><span class="toc-text">📅 Day 2: 搜索回溯进阶、动态规划、进阶数据结构与技巧 (50 题)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E5%9B%BE%E8%AE%BA-4-%E9%A2%98"><span class="toc-text">9. 图论 (4 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E5%9B%9E%E6%BA%AF-8-%E9%A2%98"><span class="toc-text">10. 回溯 (8 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE-6-%E9%A2%98"><span class="toc-text">11. 二分查找 (6 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E6%A0%88-5-%E9%A2%98"><span class="toc-text">12. 栈 (5 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E5%A0%86-3-%E9%A2%98"><span class="toc-text">13. 堆 (3 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95-4-%E9%A2%98"><span class="toc-text">14. 贪心算法 (4 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-10-%E9%A2%98"><span class="toc-text">15. 动态规划 (10 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E5%A4%9A%E7%BB%B4%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-5-%E9%A2%98"><span class="toc-text">16. 多维动态规划 (5 题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-%E6%8A%80%E5%B7%A7%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97-5-%E9%A2%98"><span class="toc-text">17. 技巧与位运算 (5 题)</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/LeetCode"><i class="tag post-item-tag">LeetCode</i></a><a href="/tags/C++"><i class="tag post-item-tag">C++</i></a><a href="/tags/%E7%AE%97%E6%B3%95"><i class="tag post-item-tag">算法</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">LeetCode Hot 100 两日极速通关清单与打卡表</h1><time class="has-text-grey" datetime="2026-10-22T23:10:00.000Z">2026-10-22</time><article class="mt-2 post-content"><blockquote>
+<p>📖 <strong>配套通关指南</strong>：👉 <a href="/2026/10/22/leetcode-hot100-study-guide/">LeetCode Hot 100 核心母题模式与 C++ STL 秒杀手册</a> （收录 17 大专题母题套路、条件反射识别矩阵、现代 C++ STL 肌肉记忆与 10 大防暴雷 CheckList）</p>
+<p><strong>目标用户画像</strong>：周赛 1700+，有一年空档期，需要唤醒解题直觉与 C++ STL 肌肉记忆。<br><strong>核心原则</strong>：</p>
+<ol>
+<li><strong>5-10 分钟原则</strong>：5 分钟内能明确闭环最优思路与边界条件的，快速心算或手写核心逻辑，打勾过；卡题超过 8 分钟立即看精选题解（如灵神、labuladong），重点记忆解题破局点与 STL 技巧，手写 AC 后打勾。</li>
+<li><strong>分类集中突破</strong>：同类型题目连刷，快速强化模式识别能力。</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="📅-Day-1-数据结构基石、搜索与回溯-50-题"><a href="#📅-Day-1-数据结构基石、搜索与回溯-50-题" class="headerlink" title="📅 Day 1: 数据结构基石、搜索与回溯 (50 题)"></a>📅 Day 1: 数据结构基石、搜索与回溯 (50 题)</h2><h3 id="1-哈希-3-题"><a href="#1-哈希-3-题" class="headerlink" title="1. 哈希 (3 题)"></a>1. 哈希 (3 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol>
+<li>两数之和 (Easy) - 哈希表补数</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="49">
+<li>字母异位词分组 (Medium) - 排序作为 key &#x2F; 字符计数作为 key</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="128">
+<li>最长连续序列 (Medium) - <code>unordered_set</code>，只从 <code>num - 1</code> 不存在时开始向后拓展</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-双指针-4-题"><a href="#2-双指针-4-题" class="headerlink" title="2. 双指针 (4 题)"></a>2. 双指针 (4 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="283">
+<li>移动零 (Easy) - 快慢双指针</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="11">
+<li>盛最多水的容器 (Medium) - 对撞双指针，短板向内收缩</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="15">
+<li>三数之和 (Medium) - 排序 + 双指针去重</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="42">
+<li>接雨水 (Hard) - 双指针维护左右最高前缀 &#x2F; 单调栈</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-滑动窗口-2-题"><a href="#3-滑动窗口-2-题" class="headerlink" title="3. 滑动窗口 (2 题)"></a>3. 滑动窗口 (2 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="3">
+<li>无重复字符的最长子串 (Medium) - 哈希窗口右扩左缩</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="438">
+<li>找到字符串中所有字母异位词 (Medium) - 定长 26 频数数组滑动窗口</li>
+</ol>
+</li>
+</ul>
+<h3 id="4-子串-前缀和-3-题"><a href="#4-子串-前缀和-3-题" class="headerlink" title="4. 子串 &#x2F; 前缀和 (3 题)"></a>4. 子串 &#x2F; 前缀和 (3 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="560">
+<li>和为 K 的子数组 (Medium) - 前缀和 + 哈希表（注意初始化 <code>map[0] = 1</code>）</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="239">
+<li>滑动窗口最大值 (Hard) - 单调队列 <code>deque</code></li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="76">
+<li>最小覆盖子串 (Hard) - 不定长滑动窗口，<code>valid</code> 计数</li>
+</ol>
+</li>
+</ul>
+<h3 id="5-普通数组-5-题"><a href="#5-普通数组-5-题" class="headerlink" title="5. 普通数组 (5 题)"></a>5. 普通数组 (5 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="53">
+<li>最大子数组和 (Medium) - Kadane 贪心 &#x2F; 动态规划</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="56">
+<li>合并区间 (Medium) - 按左端点排序，贪心合并</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="189">
+<li>轮转数组 (Medium) - 三次反转法</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="238">
+<li>除自身以外数组的乘积 (Medium) - 前缀积与后缀积</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="41">
+<li>缺失的第一个正数 (Hard) - 原地哈希（置换至 <code>nums[i] == i + 1</code>）</li>
+</ol>
+</li>
+</ul>
+<h3 id="6-矩阵-4-题"><a href="#6-矩阵-4-题" class="headerlink" title="6. 矩阵 (4 题)"></a>6. 矩阵 (4 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="73">
+<li>矩阵置零 (Medium) - 首行首列复用作标记位</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="54">
+<li>螺旋矩阵 (Medium) - 四边界收缩模拟</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="48">
+<li>旋转图像 (Medium) - 主对角线翻转 + 垂直中线水平翻转</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="240">
+<li>搜索二维矩阵 II (Medium) - 右上角（或左下角）走 Z 字查找</li>
+</ol>
+</li>
+</ul>
+<h3 id="7-链表-14-题"><a href="#7-链表-14-题" class="headerlink" title="7. 链表 (14 题)"></a>7. 链表 (14 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="160">
+<li>相交链表 (Easy) - 双指针等长路程走法</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="206">
+<li>反转链表 (Easy) - 迭代双指针 &#x2F; 递归</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="234">
+<li>回文链表 (Easy) - 快慢指针找中点 + 反转后半段</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="141">
+<li>环形链表 (Easy) - 快慢指针</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="142">
+<li>环形链表 II (Medium) - 快慢相遇后头节点与相遇点同步走</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="21">
+<li>合并两个有序链表 (Easy) - 虚拟头节点哨兵</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="2">
+<li>两数相加 (Medium) - 进位模拟</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="19">
+<li>删除链表的倒数第 N 个结点 (Medium) - 前后双指针差步 N</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="24">
+<li>两两交换链表中的节点 (Medium) - 哨兵节点迭代 &#x2F; 递归</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="25">
+<li>K 个一组翻转链表 (Hard) - 局部区间翻转 + 边界缝合</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="138">
+<li>随机链表的复制 (Medium) - 交织拆分 &#x2F; 哈希映射</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="148">
+<li>排序链表 (Medium) - 归并排序（自顶向下 &#x2F; 自底向上）</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="23">
+<li>合并 K 个升序链表 (Hard) - 小根堆 <code>priority_queue</code> 或分治归并</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="146">
+<li>LRU 缓存 (Medium) - 双向链表 + 哈希表</li>
+</ol>
+</li>
+</ul>
+<h3 id="8-二叉树-15-题"><a href="#8-二叉树-15-题" class="headerlink" title="8. 二叉树 (15 题)"></a>8. 二叉树 (15 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="94">
+<li>二叉树的中序遍历 (Easy) - 递归 &#x2F; 栈迭代</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="104">
+<li>二叉树的最大深度 (Easy) - DFS 树高</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="226">
+<li>翻转二叉树 (Easy) - 左右子树交换</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="101">
+<li>对称二叉树 (Easy) - 双指针同步遍历比较</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="543">
+<li>二叉树的直径 (Easy) - 后序遍历自底向上累加</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="102">
+<li>二叉树的层序遍历 (Medium) - 队列 BFS</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="108">
+<li>将有序数组转换为二叉搜索树 (Easy) - 二分找中点建根</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="98">
+<li>验证二叉搜索树 (Medium) - 中序严格递增 &#x2F; 范围边界传递 <code>(minVal, maxVal)</code></li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="230">
+<li>二叉搜索树中第 K 小的元素 (Medium) - 中序遍历计数</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="199">
+<li>二叉树的右视图 (Medium) - BFS 取每层最后节点 &#x2F; 根右左 DFS</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="114">
+<li>二叉树展开为链表 (Medium) - 寻找前驱节点 Morris 变体 &#x2F; 逆后序递归</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="105">
+<li>从前序与中序遍历序列构造二叉树 (Medium) - 哈希定位根节点 + 分治建树</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="437">
+<li>路径总和 III (Medium) - 树上前缀和 + 哈希回溯</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="236">
+<li>二叉树的最近公共祖先 (Medium) - 后序自底向上汇总状态</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="124">
+<li>二叉树中的最大路径和 (Hard) - 后序遍历向父节点贡献单侧最大值</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="📅-Day-2-搜索回溯进阶、动态规划、进阶数据结构与技巧-50-题"><a href="#📅-Day-2-搜索回溯进阶、动态规划、进阶数据结构与技巧-50-题" class="headerlink" title="📅 Day 2: 搜索回溯进阶、动态规划、进阶数据结构与技巧 (50 题)"></a>📅 Day 2: 搜索回溯进阶、动态规划、进阶数据结构与技巧 (50 题)</h2><h3 id="9-图论-4-题"><a href="#9-图论-4-题" class="headerlink" title="9. 图论 (4 题)"></a>9. 图论 (4 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="200">
+<li>岛屿数量 (Medium) - 沉岛网格 DFS&#x2F;BFS</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="994">
+<li>腐烂的橘子 (Medium) - 多源 BFS</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="207">
+<li>课程表 (Medium) - 拓扑排序（入度表 + BFS）&#x2F; DFS 判环</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="208">
+<li>实现 Trie (前缀树) (Medium) - 26 叉字典树节点</li>
+</ol>
+</li>
+</ul>
+<h3 id="10-回溯-8-题"><a href="#10-回溯-8-题" class="headerlink" title="10. 回溯 (8 题)"></a>10. 回溯 (8 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="46">
+<li>全排列 (Medium) - <code>used</code> 标记数组</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="78">
+<li>子集 (Medium) - 选与不选 &#x2F; 遍历起始点</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="17">
+<li>电话号码的字母组合 (Medium) - 数字映射表递归</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="39">
+<li>组合总和 (Medium) - 元素可重复选，递归传递当前索引</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="22">
+<li>括号生成 (Medium) - 左右括号剩余数剪枝</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="79">
+<li>单词搜索 (Medium) - 网格回溯标记已访问</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="131">
+<li>分割回文串 (Medium) - 切割线回溯 + 预处理回文</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="51">
+<li>N 皇后 (Hard) - 列、主对角线、副对角线位&#x2F;布尔标记</li>
+</ol>
+</li>
+</ul>
+<h3 id="11-二分查找-6-题"><a href="#11-二分查找-6-题" class="headerlink" title="11. 二分查找 (6 题)"></a>11. 二分查找 (6 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="35">
+<li>搜索插入位置 (Easy) - 标准左闭右闭模板</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="74">
+<li>搜索二维矩阵 (Medium) - 展平为一维折半</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="34">
+<li>在排序数组中查找元素的第一个和最后一个位置 (Medium) - <code>lower_bound</code> 变体</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="33">
+<li>搜索旋转排序数组 (Medium) - 判断半边是否有序</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="153">
+<li>寻找旋转排序数组中的最小值 (Medium) - 与右端点 <code>nums[right]</code> 比对收缩</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="4">
+<li>寻找两个正序数组的中位数 (Hard) - 分割线二分 &#x2F; 第 K 小二分</li>
+</ol>
+</li>
+</ul>
+<h3 id="12-栈-5-题"><a href="#12-栈-5-题" class="headerlink" title="12. 栈 (5 题)"></a>12. 栈 (5 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="20">
+<li>有效的括号 (Easy) - 栈匹配</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="155">
+<li>最小栈 (Medium) - 辅助同步栈 &#x2F; 差值入栈</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="394">
+<li>字符串解码 (Medium) - 数字栈与字符串栈</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="739">
+<li>每日温度 (Medium) - 单调递减栈</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="84">
+<li>柱状图中最大的矩形 (Hard) - 单调递增栈 + 左右哨兵</li>
+</ol>
+</li>
+</ul>
+<h3 id="13-堆-3-题"><a href="#13-堆-3-题" class="headerlink" title="13. 堆 (3 题)"></a>13. 堆 (3 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="215">
+<li>数组中的第 K 个最大元素 (Medium) - 快速选择 <code>quickselect</code> &#x2F; 最小堆</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="347">
+<li>前 K 个高频元素 (Medium) - 频数统计 + 最小堆 &#x2F; 桶排序</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="295">
+<li>数据流的中位数 (Hard) - 对顶堆（大根堆维护前半段，小根堆维护后半段）</li>
+</ol>
+</li>
+</ul>
+<h3 id="14-贪心算法-4-题"><a href="#14-贪心算法-4-题" class="headerlink" title="14. 贪心算法 (4 题)"></a>14. 贪心算法 (4 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="121">
+<li>买卖股票的最佳时机 (Easy) - 维护历史最低价</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="55">
+<li>跳跃游戏 (Medium) - 维护最远可达边界</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="45">
+<li>跳跃游戏 II (Medium) - 步数与下一次跳跃最远范围更新</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="763">
+<li>划分字母区间 (Medium) - 记录字符最后出现下标，合并断点</li>
+</ol>
+</li>
+</ul>
+<h3 id="15-动态规划-10-题"><a href="#15-动态规划-10-题" class="headerlink" title="15. 动态规划 (10 题)"></a>15. 动态规划 (10 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="70">
+<li>爬楼梯 (Easy) - 斐波那契滚动变量</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="118">
+<li>杨辉三角 (Easy) - 边界直接构造</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="198">
+<li>打家劫舍 (Medium) - 选与不选滚动数组</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="279">
+<li>完全平方数 (Medium) - 完全背包 &#x2F; 四平方和定理</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="322">
+<li>零钱兑换 (Medium) - 完全背包求最小值</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="139">
+<li>单词拆分 (Medium) - 划分型 DP</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="300">
+<li>最长递增子序列 (Medium) - $O(n^2)$ DP &#x2F; $O(n \log n)$ 贪心 + 二分（耐人寻味的耐心排序）</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="152">
+<li>乘积最大子数组 (Medium) - 维护 <code>maxDp</code> 与 <code>minDp</code>（负负得正）</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="416">
+<li>分割等和子集 (Medium) - 0-1 背包恰好装满</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="32">
+<li>最长有效括号 (Hard) - 栈 &#x2F; 动态规划 &#x2F; 左右计数法</li>
+</ol>
+</li>
+</ul>
+<h3 id="16-多维动态规划-5-题"><a href="#16-多维动态规划-5-题" class="headerlink" title="16. 多维动态规划 (5 题)"></a>16. 多维动态规划 (5 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="62">
+<li>不同路径 (Medium) - 网格到达方案数</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="64">
+<li>最小路径和 (Medium) - 原地网格 DP</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="5">
+<li>最长回文子串 (Medium) - 中心扩散法 &#x2F; 区间 DP</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="1143">
+<li>最长公共子序列 (Medium) - 经典二维 LCS</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="72">
+<li>编辑距离 (Hard) - 经典二维增删改状态转移</li>
+</ol>
+</li>
+</ul>
+<h3 id="17-技巧与位运算-5-题"><a href="#17-技巧与位运算-5-题" class="headerlink" title="17. 技巧与位运算 (5 题)"></a>17. 技巧与位运算 (5 题)</h3><ul>
+<li><input disabled="" type="checkbox"> <ol start="136">
+<li>只出现一次的数字 (Easy) - 异或抵消</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="169">
+<li>多数元素 (Easy) - 摩尔投票法</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="75">
+<li>颜色分类 (Medium) - 三指针荷兰国旗划分</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="31">
+<li>下一个排列 (Medium) - 从后向前找首个降序对 + 逆序区反转</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <ol start="287">
+<li>寻找重复数 (Medium) - 快慢指针（抽屉原理 &amp; 链表判环映射）</li>
+</ol>
+</li>
+</ul>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2026/10/22/leetcode-hot100-study-guide/" title="LeetCode Hot 100 核心母题模式与 C++ STL 秒杀手册"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: LeetCode Hot 100 核心母题模式与 C++ STL 秒杀手册</span></a><a class="button is-default" href="/2026/08/30/invalid-query-value-python-class-identity/" title="一次诡异的 invalid query value：我最终追到了 Python 的 Class Identity"><span class="has-text-weight-semibold">下一页: 一次诡异的 invalid query value：我最终追到了 Python 的 Class Identity</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--></section><p class="is-size-7"><span>Copyright ©</span><span> Jerod 2026</span></p><div><span></span></div></footer><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
